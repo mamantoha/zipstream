@@ -6,7 +6,7 @@ A command line tool that allows you to easily share files and directories as ZIP
 
 ## Installation
 
-Clone the repository
+Clone the repository:
 
 `git clone https://github.com/mamantoha/zipstream.git`
 
@@ -18,7 +18,7 @@ Build:
 
 `shards build`
 
-Copy `./bin/zipstream` to
+Copy `./bin/zipstream` to executable path.
 
 Enjoy!
 
@@ -41,7 +41,7 @@ OPTIONS
     -H HOST, --host=HOST             Specifies the host (default: 127.0.0.1)
     -p PORT, --p=PORT                Specifies the port (default: 8090)
     -o FILENAME, --output=FILENAME   Specifies the output file name (default: download.zip)
-``
+```
 
 ## Contributing
 
