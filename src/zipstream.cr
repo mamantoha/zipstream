@@ -15,26 +15,10 @@ module Zipstream
   def self.run
     CLI.new
 
-    server = HTTP::Server.new do |context|
-      context.response.content_type = MIME.from_extension(".zip")
-      context.response.headers["Content-Disposition"] = "attachment; filename=\"#{config.output}\""
-
-      reader, writer = IO.pipe
-
-      if File.directory?(config.path)
-        fork { Helpers.zip_directory!(config.path, writer) }
-      else
-        fork { Helpers.zip_file!(config.path, writer) }
-      end
-
-      writer.close
-
-      while line = reader.gets(chomp: false)
-        context.response.puts line
-      end
-
-      reader.close
-    end
+    server = HTTP::Server.new([
+      HTTP::LogHandler.new,
+      ZipHandler.new(config),
+    ])
 
     puts "Serving `#{config.path}` as `#{config.output}`"
 
