@@ -6,8 +6,6 @@ require "option_parser"
 require "./zipstream/*"
 
 module Zipstream
-  VERSION = "0.1.0"
-
   def self.config
     Config::INSTANCE
   end
@@ -18,7 +16,8 @@ module Zipstream
     server = HTTP::Server.new([
       HTTP::LogHandler.new,
       ZipHandler.new(config),
-    ])
+    ]) do |context|
+    end
 
     puts "Serving `#{config.path}` as `#{config.output}`"
 

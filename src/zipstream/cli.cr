@@ -34,7 +34,7 @@ module Zipstream
           config.host = name
         end
 
-        parser.on("-p PORT", "--p=PORT", "Specifies the port (default: #{config.port})") do |name|
+        parser.on("-p PORT", "--port=PORT", "Specifies the port (default: #{config.port})") do |name|
           unless name.chars.all?(&.number?)
             puts "ERROR: `#{name}` is not valid port number"
             exit
