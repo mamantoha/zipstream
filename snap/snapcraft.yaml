@@ -1,0 +1,23 @@
+name: zipstream
+base: core18
+version: '0.4.0'
+summary: Easily share files and directories over the network
+description: |
+  A command line tool that allows you to easily share files and directories
+  over the network.
+
+grade: stable
+confinement: strict
+architectures: [amd64]
+
+apps:
+  zipstream:
+    command: bin/zipstream
+
+parts:
+  zipstream:
+    source: ./
+    plugin: crystal
+    build-packages:
+     - git
+     - libssl1.0-dev
