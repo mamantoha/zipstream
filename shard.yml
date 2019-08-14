@@ -1,8 +1,12 @@
 name: zipstream
-version: 0.2.0
+version: 0.3.0
 
 authors:
   - Anton Maminov <anton.linux@gmail.com>
+
+dependencies:
+  crystar:
+    github: naqvis/crystar
 
 targets:
   zipstream:
