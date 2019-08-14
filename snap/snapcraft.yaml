@@ -7,17 +7,16 @@ description: |
   over the network.
 
 grade: stable
-confinement: strict
+confinement: classic # strict
 architectures: [amd64]
 
 apps:
   zipstream:
     command: bin/zipstream
-    plugs:
-      - network
-      - network-bind
-      - home
-      - removable-media
+    # plugs:
+    #   - network
+    #   - network-bind
+    #   - removable-media
 
 parts:
   zipstream:
@@ -25,4 +24,4 @@ parts:
     plugin: crystal
     build-packages:
      - git
-     - libssl1.0-dev
+     - libssl-dev
