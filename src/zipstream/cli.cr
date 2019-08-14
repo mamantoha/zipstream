@@ -12,7 +12,7 @@ module Zipstream
       optparse = OptionParser.new do |parser|
         parser.banner = <<-EOF
           NAME
-              zipstream - is a command line tool that allows you to easily share files and directories as ZIP archive over a network
+              zipstream - is a command line tool that allows you to easily share files and directories over the network
 
           VERSION
               #{Zipstream::VERSION}
@@ -36,14 +36,23 @@ module Zipstream
 
         parser.on("-p PORT", "--port=PORT", "Specifies the port (default: #{config.port})") do |name|
           unless name.chars.all?(&.number?)
-            puts "ERROR: `#{name}` is not valid port number"
+            puts "ERROR: `#{name}` is not a valid port number"
             exit
           end
 
           config.port = name.to_i
         end
 
-        parser.on("-o FILENAME", "--output=FILENAME", "Specifies the output file name (default: #{config.output})") do |name|
+        parser.on("-f FORMAT", "--format=FORMAT", "Specifies the format of output archive, zip or tar (default: #{config.format})") do |name|
+          unless ["zip", "tar"].includes?(name)
+            puts "ERROR: `#{name}` is not a valid format, zip or tar"
+            exit
+          end
+
+          config.format = name
+        end
+
+        parser.on("-o FILENAME", "--output=FILENAME", "Specifies the output file name without extension (default: #{config.output})") do |name|
           config.output = name
         end
 

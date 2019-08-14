@@ -5,17 +5,23 @@ module Zipstream
     property host
     property port
     property output
+    property format
     property path
 
     def initialize
       @host = "127.0.0.1"
       @port = 8090
-      @output = "download.zip"
+      @format = "zip"
+      @output = "download"
       @path = Dir.current
     end
 
     def self.config
       Config::INSTANCE
+    end
+
+    def filename
+      [@output, @format].join(".")
     end
   end
 end
