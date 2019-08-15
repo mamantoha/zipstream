@@ -24,10 +24,7 @@ module Zipstream
         ZipHandler.new(config)
       end
 
-    server = HTTP::Server.new([
-      HTTP::LogHandler.new,
-      handler,
-    ]) do |context|
+    server = HTTP::Server.new([handler]) do |context|
     end
 
     address = server.bind_tcp(config.host, config.port)
@@ -59,6 +56,18 @@ module Zipstream
         Or just open in browser: http://#{address}
         EOF
     end
+
+    shutdown = -> (s : Signal) do
+      puts
+      puts "See you later, alligator!"
+      server.close
+      exit
+    end
+
+    Signal::INT.trap &shutdown
+    Signal::TERM.trap &shutdown
+
+    STDOUT.flush
 
     server.listen
   end
