@@ -7,16 +7,16 @@ description: |
   over the network.
 
 grade: stable
-confinement: classic # strict
+confinement: strict
 architectures: [amd64]
 
 apps:
   zipstream:
     command: bin/zipstream
-    # plugs:
-    #   - network
-    #   - network-bind
-    #   - removable-media
+    plugs:
+      - network
+      - network-bind
+      - removable-media
 
 parts:
   zipstream:
