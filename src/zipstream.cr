@@ -57,7 +57,7 @@ module Zipstream
         EOF
     end
 
-    shutdown = -> (s : Signal) do
+    shutdown = ->(s : Signal) do
       puts
       puts "See you later, alligator!"
       server.close
