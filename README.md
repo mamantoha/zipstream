@@ -45,7 +45,7 @@ NAME
     zipstream - is a command line tool that allows you to easily share files and directories over the network
 
 VERSION
-    0.4.0
+    0.5.0
 
 SYNOPSIS
     zipstream PATH [options]
@@ -54,10 +54,11 @@ If PATH is not specified it point to current directory
 
 OPTIONS
     -h, --help                       Show this message
-    -H HOST, --host=HOST             Specifies the host (default: 127.0.0.1)
-    -p PORT, --port=PORT             Specifies the port (default: 8090)
-    -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip or tar (default: zip)
-    -o FILENAME, --output=FILENAME   Specifies the output file name without extension (default: download)
+    -H HOST, --host=HOST             Specifies the host (default: `127.0.0.1`)
+    -p PORT, --port=PORT             Specifies the port (default: `8090`)
+    -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip or tar (default: `zip`)
+    -o FILENAME, --output=FILENAME   Specifies the output file name without extension (default: `download`)
+    -e PATH, --endpoint=PATH         Specifies the URL path to the resource (default: ``)
 ```
 
 Sharing a directory (all the files in it):
