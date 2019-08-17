@@ -30,11 +30,11 @@ module Zipstream
           exit
         end
 
-        parser.on("-H HOST", "--host=HOST", "Specifies the host (default: #{config.host})") do |name|
+        parser.on("-H HOST", "--host=HOST", "Specifies the host (default: `#{config.host}`)") do |name|
           config.host = name
         end
 
-        parser.on("-p PORT", "--port=PORT", "Specifies the port (default: #{config.port})") do |name|
+        parser.on("-p PORT", "--port=PORT", "Specifies the port (default: `#{config.port}`)") do |name|
           unless name.chars.all?(&.number?)
             puts "ERROR: `#{name}` is not a valid port number"
             exit
@@ -43,7 +43,7 @@ module Zipstream
           config.port = name.to_i
         end
 
-        parser.on("-f FORMAT", "--format=FORMAT", "Specifies the format of output archive, zip or tar (default: #{config.format})") do |name|
+        parser.on("-f FORMAT", "--format=FORMAT", "Specifies the format of output archive, zip or tar (default: `#{config.format}`)") do |name|
           unless ["zip", "tar"].includes?(name)
             puts "ERROR: `#{name}` is not a valid format, zip or tar"
             exit
@@ -52,8 +52,16 @@ module Zipstream
           config.format = name
         end
 
-        parser.on("-o FILENAME", "--output=FILENAME", "Specifies the output file name without extension (default: #{config.output})") do |name|
+        parser.on("-o FILENAME", "--output=FILENAME", "Specifies the output file name without extension (default: `#{config.output}`)") do |name|
           config.output = name
+        end
+
+        parser.on("-e PATH", "--endpoint=PATH", "Specifies the URL path to the resource (default: `#{config.url_path}`)") do |name|
+          unless name.lstrip("/").match(/(*UCP)^[[:word:]0-9_-]+$/)
+            puts "ERROR: `#{name}` is not a valid url path, should contain only alphanumeric symbols"
+            exit
+          end
+          config.url_path = name
         end
 
         parser.invalid_option do |flag|

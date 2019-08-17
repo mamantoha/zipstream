@@ -8,11 +8,6 @@ module Zipstream
     end
 
     def call(context)
-      if context.request.path != "/"
-        context.response.status = :not_found
-        return
-      end
-
       context.response.content_type = MIME.from_extension(".tar")
       context.response.headers["Content-Disposition"] = "attachment; filename=\"#{config.filename}\""
 

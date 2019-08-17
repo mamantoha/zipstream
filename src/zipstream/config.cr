@@ -7,6 +7,7 @@ module Zipstream
     property output
     property format
     property path
+    property url_path
 
     def initialize
       @host = "127.0.0.1"
@@ -14,6 +15,7 @@ module Zipstream
       @format = "zip"
       @output = "download"
       @path = Dir.current
+      @url_path = ""
     end
 
     def self.config

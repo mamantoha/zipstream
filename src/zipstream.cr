@@ -14,7 +14,7 @@ module Zipstream
   def self.run
     CLI.new
 
-    handler =
+    archive_handler =
       case config.format
       when "zip"
         ZipHandler.new(config)
@@ -24,7 +24,13 @@ module Zipstream
         ZipHandler.new(config)
       end
 
-    server = HTTP::Server.new([handler]) do |context|
+      handlers = [
+        # HTTP::LogHandler.new,
+        BeforeHandler.new(config),
+        archive_handler
+      ]
+
+    server = HTTP::Server.new(handlers) do |context|
     end
 
     address = server.bind_tcp(config.host, config.port)
@@ -36,7 +42,7 @@ module Zipstream
       puts <<-EOF
         To download the file please use one of the commands below:
 
-        wget --content-disposition http://#{address}
+        wget --content-disposition http://#{address}/#{config.url_path}
         curl -OJ http://#{address}
 
         Or just open in browser: http://#{address}
@@ -45,15 +51,15 @@ module Zipstream
       puts <<-EOF
         To download the file please use one of the commands below:
 
-        wget --content-disposition http://#{address}
-        curl -OJ http://#{address}
+        wget --content-disposition http://#{address}/#{config.url_path}
+        curl -OJ http://#{address}/#{config.url_path}
 
         Or place all files into current folder:
 
-        wget -O- http://#{address} | tar -xvf -
-        curl http://#{address} | tar -xvf -
+        wget -O- http://#{address}/#{config.url_path} | tar -xvf -
+        curl http://#{address}/#{config.url_path} | tar -xvf -
 
-        Or just open in browser: http://#{address}
+        Or just open in browser: http://#{address}/#{config.url_path}
         EOF
     end
 
