@@ -45,7 +45,7 @@ NAME
     zipstream - is a command line tool that allows you to easily share files and directories over the network
 
 VERSION
-    0.6.0
+    0.7.0
 
 SYNOPSIS
     zipstream PATH [options]
@@ -59,6 +59,8 @@ OPTIONS
     -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip or tar (default: `zip`)
     -o FILENAME, --output=FILENAME   Specifies the output file name without extension (default: `download`)
     -e PATH, --endpoint=PATH         Specifies the URL path to the resource (default: ``)
+    --user=user                      Specify the username user for file retrieval
+    --password=password              Specify the password password for file retrieval
 ```
 
 Sharing a directory (all the files in it):
