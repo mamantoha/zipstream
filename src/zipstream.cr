@@ -24,11 +24,15 @@ module Zipstream
         ZipHandler.new(config)
       end
 
-      handlers = [
-        # HTTP::LogHandler.new,
-        BeforeHandler.new(config),
-        archive_handler
-      ]
+    handlers = [] of HTTP::Handler
+
+    handlers << BeforeHandler.new(config)
+
+    if config.basic_auth?
+      handlers << BasicAuthHandler.new(config.user.not_nil!, config.password.not_nil!)
+    end
+
+    handlers << archive_handler
 
     server = HTTP::Server.new(handlers) do |context|
     end
@@ -38,30 +42,7 @@ module Zipstream
     puts "Serving `#{config.path}` as `#{config.filename}`"
     puts
 
-    if config.format == "zip"
-      puts <<-EOF
-        To download the file please use one of the commands below:
-
-        wget --content-disposition http://#{address}/#{config.url_path}
-        curl -OJ http://#{address}
-
-        Or just open in browser: http://#{address}
-        EOF
-    elsif config.format == "tar"
-      puts <<-EOF
-        To download the file please use one of the commands below:
-
-        wget --content-disposition http://#{address}/#{config.url_path}
-        curl -OJ http://#{address}/#{config.url_path}
-
-        Or place all files into current folder:
-
-        wget -O- http://#{address}/#{config.url_path} | tar -xvf -
-        curl http://#{address}/#{config.url_path} | tar -xvf -
-
-        Or just open in browser: http://#{address}/#{config.url_path}
-        EOF
-    end
+    puts message(address, config)
 
     shutdown = ->(s : Signal) do
       puts
@@ -76,6 +57,55 @@ module Zipstream
     STDOUT.flush
 
     server.listen
+  end
+
+  private def self.message(address, config)
+    wget_command = [] of String
+    wget_command << "wget"
+    wget_command << "--content-disposition"
+
+    if config.basic_auth?
+      wget_command << "--user #{config.user}"
+      wget_command << "--password #{config.password}"
+    end
+
+    wget_command << "http://#{address}/#{config.url_path}"
+
+    curl_command = [] of String
+    curl_command << "curl"
+
+    curl_command << "-OJ"
+
+    if config.basic_auth?
+      curl_command << "--user #{config.user}:#{config.password}"
+    end
+
+    curl_command << "http://#{address}/#{config.url_path}"
+
+    message = String::Builder.new
+
+    message.puts "To download the file please use one of the commands below:"
+    message.puts ""
+
+    message.puts wget_command.reject(&.empty?).join(" ")
+    message.puts curl_command.reject(&.empty?).join(" ")
+
+    if config.format == "tar"
+      message.puts ""
+      message.puts "Or place all files into current folder:"
+      message.puts ""
+
+      message.print wget_command.reject(&.empty?).join(" ")
+      message.puts " | tar -xvf -"
+
+      message.print curl_command.reject(&.empty?).join(" ")
+      message.puts " | tar -xvf -"
+    end
+
+    message.puts ""
+    message.puts "Or just open in browser: http://#{address}/#{config.url_path}"
+
+    message.to_s
   end
 end
 
