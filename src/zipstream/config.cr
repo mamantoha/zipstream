@@ -8,6 +8,8 @@ module Zipstream
     property format
     property path
     property url_path
+    property user : String? = nil
+    property password : String? = nil
 
     def initialize
       @host = "127.0.0.1"
@@ -24,6 +26,10 @@ module Zipstream
 
     def filename
       [@output, @format].join(".")
+    end
+
+    def basic_auth?
+      @user && @password
     end
   end
 end

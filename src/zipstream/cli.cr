@@ -64,6 +64,14 @@ module Zipstream
           config.url_path = name
         end
 
+        parser.on("--user=user", "Specify the username user for file retrieval") do |name|
+          config.user = name
+        end
+
+        parser.on("--password=password", "Specify the password password for file retrieval") do |name|
+          config.password = name
+        end
+
         parser.invalid_option do |flag|
           puts "ERROR: #{flag} is not a valid option."
           puts parser
