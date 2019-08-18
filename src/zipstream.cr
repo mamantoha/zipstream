@@ -7,22 +7,14 @@ require "crystar"
 require "./zipstream/**"
 
 module Zipstream
-  def self.config
+  extend self
+
+  def config
     Config::INSTANCE
   end
 
-  def self.run
+  def run
     CLI.new
-
-    archive_handler =
-      case config.format
-      when "zip"
-        ZipHandler.new(config)
-      when "tar"
-        TarHandler.new(config)
-      else
-        ZipHandler.new(config)
-      end
 
     handlers = [] of HTTP::Handler
 
@@ -42,7 +34,7 @@ module Zipstream
     puts "Serving `#{config.path}` as `#{config.filename}`"
     puts
 
-    puts message(address, config)
+    puts message(address)
 
     shutdown = ->(s : Signal) do
       puts
@@ -59,7 +51,45 @@ module Zipstream
     server.listen
   end
 
-  private def self.message(address, config)
+  def archive_handler
+    case config.format
+    when "zip"
+      ZipHandler.new(config)
+    when "tar"
+      TarHandler.new(config)
+    else
+      ZipHandler.new(config)
+    end
+  end
+
+  private def message(address)
+    message = String::Builder.new
+
+    message.puts "To download the file please use one of the commands below:"
+    message.puts ""
+
+    message.puts wget_command(address)
+    message.puts curl_command(address)
+
+    if config.format == "tar"
+      message.puts ""
+      message.puts "Or place all files into current folder:"
+      message.puts ""
+
+      message.print wget_command(address)
+      message.puts " | tar -xvf -"
+
+      message.print curl_command(address)
+      message.puts " | tar -xvf -"
+    end
+
+    message.puts ""
+    message.puts "Or just open in browser: http://#{address}/#{config.url_path}"
+
+    message.to_s
+  end
+
+  private def wget_command(address)
     wget_command = [] of String
     wget_command << "wget"
     wget_command << "--content-disposition"
@@ -71,6 +101,10 @@ module Zipstream
 
     wget_command << "http://#{address}/#{config.url_path}"
 
+    wget_command.reject(&.empty?).join(" ")
+  end
+
+  private def curl_command(address)
     curl_command = [] of String
     curl_command << "curl"
 
@@ -82,30 +116,7 @@ module Zipstream
 
     curl_command << "http://#{address}/#{config.url_path}"
 
-    message = String::Builder.new
-
-    message.puts "To download the file please use one of the commands below:"
-    message.puts ""
-
-    message.puts wget_command.reject(&.empty?).join(" ")
-    message.puts curl_command.reject(&.empty?).join(" ")
-
-    if config.format == "tar"
-      message.puts ""
-      message.puts "Or place all files into current folder:"
-      message.puts ""
-
-      message.print wget_command.reject(&.empty?).join(" ")
-      message.puts " | tar -xvf -"
-
-      message.print curl_command.reject(&.empty?).join(" ")
-      message.puts " | tar -xvf -"
-    end
-
-    message.puts ""
-    message.puts "Or just open in browser: http://#{address}/#{config.url_path}"
-
-    message.to_s
+    curl_command.reject(&.empty?).join(" ")
   end
 end
 
