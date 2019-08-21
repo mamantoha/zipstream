@@ -95,7 +95,7 @@ module Zipstream
     wget_command = [] of String
     wget_command << "wget"
     wget_command << "-O-" if extract
-    wget_command << "--content-disposition"
+    wget_command << "--content-disposition" unless extract
 
     if config.basic_auth?
       wget_command << "--user #{config.user}"
