@@ -57,6 +57,8 @@ module Zipstream
       ZipHandler.new(config)
     when "tar"
       TarHandler.new(config)
+    when "tgz"
+      TgzHandler.new(config)
     else
       ZipHandler.new(config)
     end
@@ -71,16 +73,16 @@ module Zipstream
     message.puts wget_command(address)
     message.puts curl_command(address)
 
-    if config.format == "tar"
+    if ["tar", "tgz"].includes?(config.format)
       message.puts ""
       message.puts "Or place all files into current folder:"
       message.puts ""
 
-      message.print wget_command(address)
-      message.puts " | tar -xvf -"
+      message.print wget_command(address, true)
+      message.puts extract_command
 
-      message.print curl_command(address)
-      message.puts " | tar -xvf -"
+      message.print curl_command(address, true)
+      message.puts extract_command
     end
 
     message.puts ""
@@ -89,10 +91,11 @@ module Zipstream
     message.to_s
   end
 
-  private def wget_command(address)
+  private def wget_command(address, extract = false)
     wget_command = [] of String
     wget_command << "wget"
-    wget_command << "--content-disposition"
+    wget_command << "-O-" if extract
+    wget_command << "--content-disposition" unless extract
 
     if config.basic_auth?
       wget_command << "--user #{config.user}"
@@ -104,11 +107,11 @@ module Zipstream
     wget_command.reject(&.empty?).join(" ")
   end
 
-  private def curl_command(address)
+  private def curl_command(address, extract = false)
     curl_command = [] of String
     curl_command << "curl"
 
-    curl_command << "-OJ"
+    curl_command << "-OJ" unless extract
 
     if config.basic_auth?
       curl_command << "--user #{config.user}:#{config.password}"
@@ -117,6 +120,17 @@ module Zipstream
     curl_command << "http://#{address}/#{config.url_path}"
 
     curl_command.reject(&.empty?).join(" ")
+  end
+
+  private def extract_command
+    case config.format
+    when "tar"
+      " | tar -xvf -"
+    when "tgz"
+      " | tar -xzvf -"
+    else
+      ""
+    end
   end
 end
 
