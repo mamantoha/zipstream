@@ -45,7 +45,7 @@ NAME
     zipstream - is a command line tool that allows you to easily share files and directories over the network
 
 VERSION
-    0.7.0
+    0.8.0
 
 SYNOPSIS
     zipstream PATH [options]
@@ -56,7 +56,7 @@ OPTIONS
     -h, --help                       Show this message
     -H HOST, --host=HOST             Specifies the host (default: `127.0.0.1`)
     -p PORT, --port=PORT             Specifies the port (default: `8090`)
-    -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip or tar (default: `zip`)
+    -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip, tar or tgz (default: `zip`)
     -o FILENAME, --output=FILENAME   Specifies the output file name without extension (default: `download`)
     -e PATH, --endpoint=PATH         Specifies the URL path to the resource (default: ``)
     --user=user                      Specify the username user for file retrieval
@@ -71,15 +71,15 @@ Serving `/media/disk/music` as `download.tar`
 
 To download the file please use one of the commands below:
 
-wget --content-disposition http://127.0.0.1:8090
-curl -OJ http://127.0.0.1:8090
+wget --content-disposition http://127.0.0.1:8090/
+curl -OJ http://127.0.0.1:8090/
 
 Or place all files into current folder:
 
-wget -O- http://127.0.0.1:8090 | tar -xvf -
-curl http://127.0.0.1:8090 | tar -xvf -
+wget -O- http://127.0.0.1:8090/ | tar -xvf -
+curl http://127.0.0.1:8090/ | tar -xvf -
 
-Or just open in browser: http://127.0.0.1:8090
+Or just open in browser: http://127.0.0.1:8090/
 ```
 
 ## Contributing
