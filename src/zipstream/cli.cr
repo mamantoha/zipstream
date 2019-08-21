@@ -43,9 +43,9 @@ module Zipstream
           config.port = name.to_i
         end
 
-        parser.on("-f FORMAT", "--format=FORMAT", "Specifies the format of output archive, zip or tar (default: `#{config.format}`)") do |name|
-          unless ["zip", "tar"].includes?(name)
-            puts "ERROR: `#{name}` is not a valid format, zip or tar"
+        parser.on("-f FORMAT", "--format=FORMAT", "Specifies the format of output archive, zip, tar or tgz (default: `#{config.format}`)") do |name|
+          unless ["zip", "tar", "tgz"].includes?(name)
+            puts "ERROR: `#{name}` is not a valid format, zip, tar, tgz"
             exit
           end
 
