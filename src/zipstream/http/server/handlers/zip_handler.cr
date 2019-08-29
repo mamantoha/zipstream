@@ -32,13 +32,15 @@ module Zipstream
 
     private def zip_directory!(path : String, io : IO)
       Zip::Writer.open(io) do |zip|
-        Dir[File.join(path, "**/*")].each do |file|
-          relative_path = file.sub(path, "")
+        Dir[File.join(path, "**/*")].each do |entry|
+          next unless File.readable?(entry)
 
-          if File.directory?(file)
+          relative_path = entry.sub(path, "")
+
+          if File.directory?(entry)
             zip.add_dir(relative_path)
           else
-            zip.add(relative_path, File.open(file))
+            zip.add(relative_path, File.open(entry))
           end
         end
       end

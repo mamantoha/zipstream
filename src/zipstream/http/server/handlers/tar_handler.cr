@@ -33,6 +33,8 @@ module Zipstream
     private def tar_directory!(path : String, io : IO)
       Crystar::Writer.open(io) do |tar|
         Dir[File.join(path, "**/*")].each do |entry|
+          next unless File.readable?(entry)
+
           relative_path = entry.sub(path, "").lstrip("/")
           permissions = File.info(entry).permissions.value.to_i64
 

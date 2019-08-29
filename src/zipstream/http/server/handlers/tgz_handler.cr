@@ -34,6 +34,8 @@ module Zipstream
       Gzip::Writer.open(io) do |gzip|
         Crystar::Writer.open(gzip) do |tar|
           Dir[File.join(path, "**/*")].each do |entry|
+            next unless File.readable?(entry)
+
             relative_path = entry.sub(Regex.escape(path), "")
             permissions = File.info(entry).permissions.value.to_i64
 
