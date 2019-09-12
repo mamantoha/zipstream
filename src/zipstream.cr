@@ -3,6 +3,7 @@ require "http/server"
 require "mime"
 require "option_parser"
 require "crystar"
+require "ngrok"
 
 require "./zipstream/**"
 
@@ -34,6 +35,11 @@ module Zipstream
     unless File.readable?(config.path)
       puts "#{config.path} : Permission denied"
       exit
+    end
+
+    Ngrok.start({addr: "#{config.host}:#{config.port}"}) do |ngrok|
+      puts "http:  #{ngrok.ngrok_url}"
+      puts "https: #{ngrok.ngrok_url_https}"
     end
 
     puts "Serving `#{config.path}` as `#{config.filename}`"
