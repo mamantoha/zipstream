@@ -8,24 +8,28 @@ module Zipstream
     end
 
     def call(context)
-      context.response.content_type = MIME.from_extension(".tar")
+      context.response.content_type = "application/x-tar"
       context.response.headers["Content-Disposition"] = "attachment; filename=\"#{config.filename}\""
 
       reader, writer = IO.pipe
 
+      spawn same_thread: true do
+        while line = reader.gets(chomp: false)
+          context.response.puts line
+        end
+
+        reader.close
+      end
+
       if File.directory?(config.path)
-        fork { tar_directory!(config.path, writer) }
+        tar_directory!(config.path, writer)
       else
-        fork { tar_file!(config.path, writer) }
+        tar_file!(config.path, writer)
       end
 
       writer.close
 
-      while line = reader.gets(chomp: false)
-        context.response.puts line
-      end
-
-      reader.close
+      Fiber.yield
 
       call_next(context)
     end
