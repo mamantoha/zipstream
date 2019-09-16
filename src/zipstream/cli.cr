@@ -79,7 +79,7 @@ module Zipstream
         end
       end
 
-      optparse.parse!
+      optparse.parse
 
       config.path = File.expand_path(ARGV.pop? || config.path, Dir.current)
 
