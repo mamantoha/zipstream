@@ -1,7 +1,8 @@
 # zipstream
 
-[![zipstream](https://snapcraft.io/zipstream/badge.svg)](https://snapcraft.io/zipstream)
 [![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=?style=plastic&logo=appveyor)](https://crystal-lang.org/)
+[![Build Status](https://travis-ci.org/mamantoha/zipstream.svg?branch=master)](https://travis-ci.org/mamantoha/zipstream)
+[![zipstream](https://snapcraft.io/zipstream/badge.svg)](https://snapcraft.io/zipstream)
 [![Snap Status](https://build.snapcraft.io/badge/mamantoha/zipstream.svg)](https://build.snapcraft.io/user/mamantoha/zipstream)
 
 A command line tool that allows you to easily share files and directories over the network
