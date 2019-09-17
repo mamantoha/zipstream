@@ -68,6 +68,15 @@ Sharing a directory (all the files in it):
 
 ```console
 $ zipstream /media/disk/music -f tar
+     _           _
+    (_)         | |
+ _____ _ __  ___| |_ _ __ ___  __ _ _ __ ___
+|_  / | '_ \/ __| __| '__/ _ \/ _` | '_ ` _ \
+ / /| | |_) \__ \ |_| | |  __/ (_| | | | | | |
+/___|_| .__/|___/\__|_|  \___|\__,_|_| |_| |_|
+      | |
+      |_|
+
 Serving `/media/disk/music` as `download.tar`
 
 To download the file please use one of the commands below:
