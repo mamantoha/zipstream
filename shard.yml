@@ -10,7 +10,7 @@ dependencies:
 
 targets:
   zipstream:
-    main: src/zipstream.cr
+    main: src/zipstream_cli.cr
 
 crystal: 0.30.1
 

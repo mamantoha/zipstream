@@ -1,0 +1,3 @@
+require "./zipstream"
+
+Zipstream.run

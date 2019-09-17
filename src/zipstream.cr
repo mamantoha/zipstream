@@ -9,7 +9,7 @@ require "./zipstream/**"
 module Zipstream
   extend self
 
-  def config
+  def self.config
     Config::INSTANCE
   end
 
@@ -36,6 +36,9 @@ module Zipstream
       exit
     end
 
+    puts banner
+    puts
+
     puts "Serving `#{config.path}` as `#{config.filename}`"
     puts
 
@@ -53,7 +56,7 @@ module Zipstream
 
     STDOUT.flush
 
-    server.listen
+    server.listen unless config.env == "test"
   end
 
   def archive_handler
@@ -137,6 +140,18 @@ module Zipstream
       ""
     end
   end
-end
 
-Zipstream.run
+  private def banner
+    lines = [] of String
+    lines << %q{     _           _                            }
+    lines << %q{    (_)         | |                           }
+    lines << %q{ _____ _ __  ___| |_ _ __ ___  __ _ _ __ ___  }
+    lines << %q{|_  / | '_ \/ __| __| '__/ _ \/ _` | '_ ` _ \ }
+    lines << %q{ / /| | |_) \__ \ |_| | |  __/ (_| | | | | | |}
+    lines << %q{/___|_| .__/|___/\__|_|  \___|\__,_|_| |_| |_|}
+    lines << %q{      | |                                     }
+    lines << %q{      |_|                                     }
+
+    lines.join("\n")
+  end
+end
