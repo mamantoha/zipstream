@@ -9,7 +9,7 @@ require "./zipstream/**"
 module Zipstream
   extend self
 
-  def self.config
+  def config
     Config::INSTANCE
   end
 
