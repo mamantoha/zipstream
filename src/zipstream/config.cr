@@ -8,6 +8,7 @@ module Zipstream
     property format
     property path
     property url_path
+    property env
     property user : String? = nil
     property password : String? = nil
 
@@ -18,10 +19,7 @@ module Zipstream
       @output = "download"
       @path = Dir.current
       @url_path = ""
-    end
-
-    def self.config
-      Config::INSTANCE
+      @env = "development"
     end
 
     def filename

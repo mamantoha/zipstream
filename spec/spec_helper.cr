@@ -1,2 +1,2 @@
 require "spec"
-require "../src/zipstream1"
+require "../src/zipstream"

@@ -3,7 +3,7 @@ module Zipstream
     property config
 
     def initialize
-      @config = Config.config
+      @config = Zipstream.config
 
       parse
     end
