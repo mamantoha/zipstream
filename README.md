@@ -67,7 +67,7 @@ OPTIONS
 Sharing a directory (all the files in it):
 
 ```console
-$ zipstream /media/disk/music -f tar
+$ zipstream -f tar /media/disk/music --user=admin --password=passwd -o music -e dl
      _           _
     (_)         | |
  _____ _ __  ___| |_ _ __ ___  __ _ _ __ ___
@@ -77,19 +77,19 @@ $ zipstream /media/disk/music -f tar
       | |
       |_|
 
-Serving `/media/disk/music` as `download.tar`
+Serving `/media/disk/music` as `music.tar`
 
 To download the file please use one of the commands below:
 
-wget --content-disposition http://127.0.0.1:8090/
-curl -OJ http://127.0.0.1:8090/
+wget --content-disposition --user admin --password passwd http://127.0.0.1:8090/dl
+curl -OJ --user admin:passwd http://127.0.0.1:8090/dl
 
 Or place all files into current folder:
 
-wget -O- http://127.0.0.1:8090/ | tar -xvf -
-curl http://127.0.0.1:8090/ | tar -xvf -
+wget -O- --user admin --password passwd http://127.0.0.1:8090/dl | tar -xvf -
+curl --user admin:passwd http://127.0.0.1:8090/dl | tar -xvf -
 
-Or just open in browser: http://127.0.0.1:8090/
+Or just open in browser: http://127.0.0.1:8090/dl
 ```
 
 ## Contributing
