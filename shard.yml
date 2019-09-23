@@ -1,8 +1,8 @@
 name: zipstream
-version: 0.8.0
+version: 0.9.0
 
 authors:
-  - Anton Maminov <anton.linux@gmail.com>
+  - Anton Maminov <anton.maminov@gmail.com>
 
 dependencies:
   crystar:
