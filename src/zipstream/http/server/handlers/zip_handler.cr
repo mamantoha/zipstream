@@ -8,24 +8,28 @@ module Zipstream
     end
 
     def call(context)
-      context.response.content_type = MIME.from_extension(".zip")
+      context.response.content_type = "application/zip"
       context.response.headers["Content-Disposition"] = "attachment; filename=\"#{config.filename}\""
 
       reader, writer = IO.pipe
 
+      spawn same_thread: true do
+        while line = reader.gets(chomp: false)
+          context.response.puts(line)
+        end
+
+        reader.close
+      end
+
       if File.directory?(config.path)
-        fork { zip_directory!(config.path, writer) }
+        zip_directory!(config.path, writer)
       else
-        fork { zip_file!(config.path, writer) }
+        zip_file!(config.path, writer)
       end
 
       writer.close
 
-      while line = reader.gets(chomp: false)
-        context.response.puts line
-      end
-
-      reader.close
+      Fiber.yield
 
       call_next(context)
     end
@@ -48,7 +52,7 @@ module Zipstream
 
     private def zip_file!(file : String, io : IO)
       Zip::Writer.open(io) do |zip|
-        zip.add("/#{File.basename(file)}", File.open(file))
+        zip.add("/#{File.basename(file)}", File.read(file))
       end
     end
   end
