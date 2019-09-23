@@ -55,7 +55,7 @@ If PATH is not specified it point to current directory
 
 OPTIONS
     -h, --help                       Show this message
-    -H HOST, --host=HOST             Specifies the host (default: `0.0.0.0` - all IPv4 addresses on the machine)
+    -H HOST, --host=HOST             Specifies the host (default: `0.0.0.0`)
     -p PORT, --port=PORT             Specifies the port (default: `8090`)
     -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip, tar or tgz (default: `zip`)
     -o FILENAME, --output=FILENAME   Specifies the output file name without extension (default: `download`)
@@ -81,15 +81,15 @@ Serving `/media/disk/music` as `music.tar`
 
 To download the file please use one of the commands below:
 
-wget --content-disposition --user admin --password passwd http://127.0.0.1:8090/dl
-curl -OJ --user admin:passwd http://127.0.0.1:8090/dl
+wget --content-disposition --user admin --password passwd http://0.0.0.0:8090/dl
+curl -OJ --user admin:passwd http://0.0.0.0:8090/dl
 
 Or place all files into current folder:
 
-wget -O- --user admin --password passwd http://127.0.0.1:8090/dl | tar -xvf -
-curl --user admin:passwd http://127.0.0.1:8090/dl | tar -xvf -
+wget -O- --user admin --password passwd http://0.0.0.0:8090/dl | tar -xvf -
+curl --user admin:passwd http://0.0.0.0:8090/dl | tar -xvf -
 
-Or just open in browser: http://127.0.0.1:8090/dl
+Or just open in browser: http://0.0.0.0:8090/dl
 ```
 
 ## Contributing
