@@ -55,7 +55,7 @@ If PATH is not specified it point to current directory
 
 OPTIONS
     -h, --help                       Show this message
-    -H HOST, --host=HOST             Specifies the host (default: `127.0.0.1`)
+    -H HOST, --host=HOST             Specifies the host (default: `0.0.0.0` - all IPv4 addresses on the machine)
     -p PORT, --port=PORT             Specifies the port (default: `8090`)
     -f FORMAT, --format=FORMAT       Specifies the format of output archive, zip, tar or tgz (default: `zip`)
     -o FILENAME, --output=FILENAME   Specifies the output file name without extension (default: `download`)
