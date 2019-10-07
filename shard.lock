@@ -1,0 +1,6 @@
+version: 1.0
+shards:
+  crystar:
+    github: naqvis/crystar
+    version: 0.1.2
+
