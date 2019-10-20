@@ -30,6 +30,10 @@ module Zipstream
           exit
         end
 
+        parser.on("-w", "--web", "Run web server") do
+          config.web = true
+        end
+
         parser.on("-H HOST", "--host=HOST", "Specifies the host (default: `#{config.host}`)") do |name|
           config.host = name
         end

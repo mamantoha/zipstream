@@ -16,6 +16,14 @@ module Zipstream
   def run
     CLI.new
 
+    if config.web
+      run_web
+    else
+      run_cli
+    end
+  end
+
+  def run_cli
     handlers = [] of HTTP::Handler
 
     handlers << BeforeHandler.new(config)
@@ -57,6 +65,15 @@ module Zipstream
     STDOUT.flush
 
     server.listen unless config.env == "test"
+  end
+
+  def run_web
+    server = Zipstream::Web::Server.new
+
+    puts banner
+    puts
+
+    server.run unless config.env == "test"
   end
 
   def archive_handler
