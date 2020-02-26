@@ -46,6 +46,7 @@ module Zipstream
             header = Crystar::Header.new(
               name: "#{relative_path}/",
               mode: permissions,
+              mod_time: File.info(entry).modification_time,
               size: 0_i64
             )
 
@@ -55,6 +56,7 @@ module Zipstream
             header = Crystar::Header.new(
               name: relative_path,
               mode: permissions,
+              mod_time: File.info(entry).modification_time,
               size: File.info(entry).size.to_i64
             )
 
@@ -72,6 +74,7 @@ module Zipstream
         header = Crystar::Header.new(
           name: File.basename(file),
           mode: permissions,
+          mod_time: File.info(file).modification_time,
           size: File.info(file).size.to_i64
         )
 
