@@ -76,7 +76,8 @@ module Zipstream
           return
         end
 
-        context.response.content_type = MIME.from_filename(file_path.to_s, "application/octet-stream")
+        # context.response.content_type = MIME.from_filename(file_path.to_s, "application/octet-stream")
+        context.response.content_type = MIME.from_filename(file_path.to_s, "document")
         context.response.content_length = File.size(file_path)
         File.open(file_path) do |file|
           IO.copy(file, context.response)

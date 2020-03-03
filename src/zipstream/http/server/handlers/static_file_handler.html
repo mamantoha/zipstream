@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>Index of <%= HTML.escape request_path %></title>
 
     <style>
@@ -55,11 +56,13 @@
   </head>
   <body>
     <h1>Index of <%= HTML.escape request_path %></h1>
-    <div id="parentDirLinkBox" style="display: block;">
-      <a id="parentDirLink" class="icon up" href="#">
-        <span id="parentDirText">[parent directory]</span>
-      </a>
-    </div>
+    <% unless request_path == "/" %>
+      <div id="parentDirLinkBox" style="display: block;">
+        <a id="parentDirLink" class="icon up" href="<%= URI.encode(request_path) %>..">
+          <span id="parentDirText">[parent directory]</span>
+        </a>
+      </div>
+    <% end %>
 
     <table>
       <thead>
