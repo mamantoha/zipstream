@@ -81,7 +81,7 @@
               <% entry_class = file.info.directory? ? "icon dir" : "icon file" %>
               <a class="<%= entry_class %>" href="<%= encoded_request_path %><%= URI.encode entry %>"><%= HTML.escape entry %></a>
             </td>
-            <td class="detailsColumn"><%= file.info.file? ? file.info.size.humanize : nil %></td>
+            <td class="detailsColumn"><%= file.info.file? ? file.info.size.humanize_bytes : nil %></td>
             <td class="detailsColumn"><%= file.info.modification_time %></td>
           </tr>
         <% end %>
