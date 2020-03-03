@@ -131,9 +131,10 @@ module Zipstream
     end
 
     record DirectoryListing, request_path : String, path : String do
-      def each_entry
+      def each_file
         Dir.each_child(path) do |entry|
-          yield entry
+          file = File.new(File.join(path, entry))
+          yield file
         end
       end
 
