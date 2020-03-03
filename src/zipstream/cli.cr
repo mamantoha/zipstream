@@ -30,15 +30,15 @@ module Zipstream
           exit
         end
 
-        parser.on("-w", "--web", "Run web server") do
+        parser.on("-w", "--web", "Run WEB Server with the directory listing (default: CLI mode)") do
           config.web = true
         end
 
-        parser.on("-H HOST", "--host=HOST", "Specifies the host (default: `#{config.host}`)") do |name|
+        parser.on("-H HOST", "--host=HOST", "the host (default: `#{config.host}`)") do |name|
           config.host = name
         end
 
-        parser.on("-p PORT", "--port=PORT", "Specifies the port (default: `#{config.port}`)") do |name|
+        parser.on("-p PORT", "--port=PORT", "the port (default: `#{config.port}`)") do |name|
           unless name.chars.all?(&.number?)
             puts "ERROR: `#{name}` is not a valid port number"
             exit
@@ -47,7 +47,7 @@ module Zipstream
           config.port = name.to_i
         end
 
-        parser.on("-f FORMAT", "--format=FORMAT", "Specifies the format of output archive, zip, tar or tgz (default: `#{config.format}`)") do |name|
+        parser.on("-f FORMAT", "--format=FORMAT", "the format of output archive, zip, tar or tgz. Only for CLI mode. (default: `#{config.format}`)") do |name|
           unless ["zip", "tar", "tgz"].includes?(name)
             puts "ERROR: `#{name}` is not a valid format, zip, tar, tgz"
             exit
@@ -56,11 +56,11 @@ module Zipstream
           config.format = name
         end
 
-        parser.on("-o FILENAME", "--output=FILENAME", "Specifies the output file name without extension (default: `#{config.output}`)") do |name|
+        parser.on("-o FILENAME", "--output=FILENAME", "the output file name without extension. Only for CLI mode. (default: `#{config.output}`)") do |name|
           config.output = name
         end
 
-        parser.on("-e PATH", "--endpoint=PATH", "Specifies the URL path to the resource (default: `#{config.url_path}`)") do |name|
+        parser.on("-e PATH", "--endpoint=PATH", "the URL path to the resource. Only for CLI mode. (default: `#{config.url_path}`)") do |name|
           unless name.lstrip("/").match(/(*UCP)^[[:word:]0-9_-]+$/)
             puts "ERROR: `#{name}` is not a valid url path, should contain only alphanumeric symbols"
             exit
@@ -68,11 +68,11 @@ module Zipstream
           config.url_path = name
         end
 
-        parser.on("--user=user", "Specify the username user for file retrieval") do |name|
+        parser.on("--user=user", "the username user for file retrieval") do |name|
           config.user = name
         end
 
-        parser.on("--password=password", "Specify the password password for file retrieval") do |name|
+        parser.on("--password=password", "the password password for file retrieval") do |name|
           config.password = name
         end
 
