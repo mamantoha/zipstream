@@ -6,9 +6,13 @@ module Zipstream
       end
 
       def run
-        handlers = [
-          StaticFileHandler.new(config.path),
-        ]
+        handlers = [] of HTTP::Handler
+
+        if config.basic_auth?
+          handlers << BasicAuthHandler.new(config.user.not_nil!, config.password.not_nil!)
+        end
+
+        handlers << StaticFileHandler.new(config.path)
 
         server = HTTP::Server.new(handlers)
         address = server.bind_tcp(config.host, config.port)
