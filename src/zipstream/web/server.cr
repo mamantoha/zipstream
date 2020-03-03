@@ -7,7 +7,7 @@ module Zipstream
 
       def run
         handlers = [
-          HTTP::StaticFileHandler.new(config.path),
+          StaticFileHandler.new(config.path),
         ]
 
         server = HTTP::Server.new(handlers)

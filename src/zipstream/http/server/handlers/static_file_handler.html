@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Directory listing for <%= HTML.escape request_path %></title>
+  </head>
+  <body>
+    <h2>Directory listing for <%= HTML.escape request_path %></h2>
+    <hr/>
+    <ul>
+      <% encoded_request_path = URI.encode(request_path) %>
+      <% each_entry do |entry| %>
+        <li>
+          <a href="<%= encoded_request_path %><%= URI.encode entry %>"><%= HTML.escape entry %></a>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
