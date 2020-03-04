@@ -159,7 +159,7 @@
         }
 
         // Column 0 is text.
-        switch (a.toLowerCase().localeCompare(b.toLowerCase())) {
+        switch (a.localeCompare(b, { sensitivity: 'base' })) {
           case 1:
             return newOrder;
           case -1:
