@@ -132,7 +132,7 @@ module Zipstream
 
     record DirectoryListing, request_path : String, path : String do
       def each_file
-        Dir.children(path).sort.each do |entry|
+        Dir.children(path).sort_by(&.downcase).each do |entry|
           file = File.new(File.join(path, entry))
           yield file
         end
