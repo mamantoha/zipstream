@@ -159,11 +159,14 @@
         }
 
         // Column 0 is text.
-        if (a > b)
-          return newOrder;
-        if (a < b)
-          return oldOrder;
-        return 0;
+        switch (a.toLowerCase().localeCompare(b.toLowerCase())) {
+          case 1:
+            return newOrder;
+          case -1:
+            return oldOrder;
+          default:
+            return 0;
+        }
       });
 
       // Appending an existing child again just moves it.
