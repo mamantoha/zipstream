@@ -23,6 +23,22 @@
       cursor: pointer;
     }
 
+    th[data-order="-1"]::after {
+      content: "\2191";
+    }
+
+    th[data-order="1"]::after {
+      content: "\2193";
+    }
+
+    th[data-order]::after {
+      font-size: 75%;
+      width: .8em;
+      margin-inline-end: -.8em;
+      text-align: end;
+      vertical-align: text-bottom;
+    }
+
     td.detailsColumn {
       padding-left: 2em;
       text-align: end;
@@ -140,6 +156,9 @@
       var oldOrder = theader.cells[column].dataset.order || '1';
       oldOrder = parseInt(oldOrder, 10)
       var newOrder = 0 - oldOrder;
+      for (let cell of theader.cells) {
+        cell.removeAttribute('data-order');
+      }
       theader.cells[column].dataset.order = newOrder;
 
       var tbody = document.getElementById("tbody");
