@@ -1,3 +1,4 @@
 module Zipstream
-  VERSION = "0.10.0"
+  module Web
+  end
 end

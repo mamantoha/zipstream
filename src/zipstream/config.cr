@@ -4,6 +4,7 @@ module Zipstream
 
     property host
     property port
+    property web : Bool = false
     property output
     property format
     property path
