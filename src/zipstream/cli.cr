@@ -30,6 +30,10 @@ module Zipstream
           exit
         end
 
+        parser.on("-l", "--log", "logging of requests/responses") do
+          config.log = true
+        end
+
         parser.on("-w", "--web", "Run WEB Server with the directory listing (default: CLI mode)") do
           config.web = true
         end
