@@ -17,8 +17,27 @@ module Zipstream
         server = HTTP::Server.new(handlers)
         address = server.bind_tcp(config.host, config.port)
 
+        unless File.readable?(config.path)
+          puts "#{config.path} : Permission denied"
+          exit
+        end
+
         puts "Serving `#{config.path}` at http://#{address}/#{config.url_path}"
-        server.listen
+        puts
+
+        shutdown = ->(s : Signal) do
+          puts
+          puts "See you later, alligator!"
+          server.close
+          exit
+        end
+
+        Signal::INT.trap &shutdown
+        Signal::TERM.trap &shutdown
+
+        STDOUT.flush
+
+        server.listen unless config.env == "test"
       end
     end
   end
