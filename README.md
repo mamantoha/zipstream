@@ -46,7 +46,7 @@ NAME
     zipstream - is a command line tool that allows you to easily share files and directories over the network
 
 VERSION
-    0.10.1
+    0.11.0
 
 SYNOPSIS
     zipstream PATH [options]
@@ -55,6 +55,7 @@ If PATH is not specified it point to current directory
 
 OPTIONS
     -h, --help                       Show this message
+    -l, --log                        logging of requests/responses
     -w, --web                        Run WEB Server with the directory listing (default: CLI mode)
     -H HOST, --host=HOST             the host (default: `0.0.0.0`)
     -p PORT, --port=PORT             the port (default: `8090`)
