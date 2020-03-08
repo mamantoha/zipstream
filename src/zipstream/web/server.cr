@@ -8,6 +8,10 @@ module Zipstream
       def run
         handlers = [] of HTTP::Handler
 
+        if config.log
+          handlers << LogHandler.new
+        end
+
         if config.basic_auth?
           handlers << BasicAuthHandler.new(config.user.not_nil!, config.password.not_nil!)
         end

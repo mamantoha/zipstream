@@ -26,6 +26,10 @@ module Zipstream
   def run_cli
     handlers = [] of HTTP::Handler
 
+    if config.log
+      handlers << LogHandler.new
+    end
+
     handlers << BeforeHandler.new(config)
 
     if config.basic_auth?
