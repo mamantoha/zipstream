@@ -31,5 +31,9 @@ module Zipstream
     def basic_auth?
       @user && @password
     end
+
+    def self.release_date
+      {{ `date -R`.stringify.chomp }}
+    end
   end
 end

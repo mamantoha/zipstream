@@ -25,7 +25,7 @@ module Zipstream
           OPTIONS
           EOF
 
-        parser.on("-h", "--help", "Show this message") do
+        parser.on("-h", "--help", "give this help list") do
           puts parser
           exit
         end
@@ -34,7 +34,7 @@ module Zipstream
           config.log = true
         end
 
-        parser.on("-w", "--web", "Run WEB Server with the directory listing (default: CLI mode)") do
+        parser.on("-w", "--web", "run WEB Server with the directory listing (default: CLI mode)") do
           config.web = true
         end
 
@@ -78,6 +78,12 @@ module Zipstream
 
         parser.on("--password=password", "the password password for file retrieval") do |name|
           config.password = name
+        end
+
+        parser.on("-V", "--version", "print program version") do
+          puts "zipstream #{Zipstream::VERSION} crystal/#{Crystal::VERSION} crystar/#{Crystar::VERSION}"
+          puts "Release-Date: #{Time.parse_rfc2822(Config.release_date).to_s("%Y-%m-%d")}"
+          exit
         end
 
         parser.invalid_option do |flag|
