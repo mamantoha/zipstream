@@ -1,3 +1,3 @@
 module Zipstream
-  VERSION = "0.11.1"
+  VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
 end
