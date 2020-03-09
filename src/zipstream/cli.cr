@@ -81,7 +81,9 @@ module Zipstream
         end
 
         parser.on("-V", "--version", "print program version") do
-          puts "zipstream #{Zipstream::VERSION} crystal/#{Crystal::VERSION} crystar/#{Crystar::VERSION}"
+          default_target = Crystal::DESCRIPTION.split.last
+
+          puts "zipstream #{Zipstream::VERSION} (#{default_target}) crystal/#{Crystal::VERSION} crystar/#{Crystar::VERSION}"
           puts "Release-Date: #{Time.parse_rfc2822(Config.release_date).to_s("%Y-%m-%d")}"
           exit
         end
