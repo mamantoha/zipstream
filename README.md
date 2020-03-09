@@ -67,7 +67,7 @@ OPTIONS
     -V, --version                    print program version
 ```
 
-Sharing a directory (all the files in it):
+Sharing a directory as tar archive:
 
 ```console
 $ zipstream -f tar /media/disk/music --user=admin --password=passwd -o music -e dl
@@ -94,6 +94,14 @@ curl --user admin:passwd http://0.0.0.0:8090/dl | tar -xvf -
 
 Or just open in browser: http://0.0.0.0:8090/dl
 ```
+
+Run an ad hoc http static server in specified directory, available at <http://localhost:8090>:
+
+```console
+zipstream /media/disk/crystal --web
+```
+
+[![Image of browser](https://raw.githubusercontent.com/mamantoha/zipstream/master/assets/zipstream_web.png)](https://raw.githubusercontent.com/mamantoha/zipstream/master/assets/zipstream_web.png)
 
 ## Contributing
 
