@@ -101,6 +101,8 @@ Run an ad hoc http static server in specified directory, available at <http://lo
 zipstream /media/disk/crystal --web
 ```
 
+[![Image of browser](https://raw.githubusercontent.com/mamantoha/zipstream/master/assets/zipstream_web.png)](https://raw.githubusercontent.com/mamantoha/zipstream/master/assets/zipstream_web.png)
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/zipstream/fork>)
