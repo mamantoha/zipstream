@@ -38,8 +38,7 @@ module Zipstream
 
     handlers << archive_handler
 
-    server = HTTP::Server.new(handlers) do |context|
-    end
+    server = HTTP::Server.new(handlers) { }
 
     address = server.bind_tcp(config.host, config.port)
 
@@ -56,7 +55,7 @@ module Zipstream
 
     puts message(address)
 
-    shutdown = ->(s : Signal) do
+    shutdown = ->(_s : Signal) do
       puts
       puts "See you later, alligator!"
       server.close

@@ -23,7 +23,6 @@ module Zipstream
         end
       end
 
-      headers = HTTP::Headers.new
       context.response.status_code = 401
       context.response.headers["WWW-Authenticate"] = HEADER_LOGIN_REQUIRED
       context.response.print AUTH_MESSAGE
