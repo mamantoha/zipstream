@@ -137,6 +137,8 @@ module Zipstream
           next unless File.readable?(file_path)
           file = File.new(file_path)
           yield file
+        rescue File::AccessDeniedError
+          next
         end
       end
 
