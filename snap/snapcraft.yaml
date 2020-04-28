@@ -25,6 +25,7 @@ apps:
       - network
       - network-bind
       - home
+      - personal-files
       - removable-media
 
 parts:
