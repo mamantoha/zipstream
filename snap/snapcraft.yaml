@@ -34,3 +34,5 @@ parts:
     build-packages:
      - git
      - libssl-dev
+    crystal-build-options:
+    - -Dpreview_mt
