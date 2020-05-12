@@ -40,7 +40,7 @@ module Zipstream
     # The IP address of the client (remote host) which made the request.
     private def remote_address(context)
       if remote_address = context.request.remote_address
-        remote_address.split(":").first
+        remote_address.to_s.split(":").first
       else
         "-"
       end
