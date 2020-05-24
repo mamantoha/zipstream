@@ -6,7 +6,9 @@ authors:
 
 dependencies:
   crystar:
-    github: naqvis/crystar
+    # github: naqvis/crystar
+    github: mamantoha/crystar
+    branch: crystal/0.35.0
 
 targets:
   zipstream:

@@ -1,6 +1,6 @@
 version: 1.0
 shards:
   crystar:
-    github: naqvis/crystar
-    version: 0.1.5
+    github: mamantoha/crystar
+    commit: cb2790bb49f1c3a4e2d2bfc5dca59798e21349cf
 
