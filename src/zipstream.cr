@@ -163,15 +163,42 @@ module Zipstream
   end
 
   private def banner
+    # https://jonasjacek.github.io/colors/
+    c = {
+      red:    "\033[38;5;196m",
+      orange: "\033[38;5;202m",
+      yellow: "\033[38;5;226m",
+      green:  "\033[38;5;082m",
+      blue:   "\033[38;5;021m",
+      cyan:   "\033[38;5;051m",
+      purple: "\033[38;5;129m",
+      indigo: "\033[38;5;093m",
+      violet: "\033[38;5;163m",
+      reset:  "\033[m",
+    }
+
+    colors = [
+      c[:red],
+      c[:orange],
+      c[:yellow],
+      c[:green],
+      c[:blue],
+      c[:indigo],
+      c[:violet],
+      c[:indigo],
+      c[:cyan],
+      c[:reset],
+    ]
+
     lines = [] of String
-    lines << %q{     _           _                            }
-    lines << %q{    (_)         | |                           }
-    lines << %q{ _____ _ __  ___| |_ _ __ ___  __ _ _ __ ___  }
-    lines << %q{|_  / | '_ \/ __| __| '__/ _ \/ _` | '_ ` _ \ }
-    lines << %q{ / /| | |_) \__ \ |_| | |  __/ (_| | | | | | |}
-    lines << %q{/___|_| .__/|___/\__|_|  \___|\__,_|_| |_| |_|}
-    lines << %q{      | |                                     }
-    lines << %q{      |_|                                     }
+    lines << %q{%s     %s_%s      %s     %s_   %s     %s    %s      %s          %s} % colors
+    lines << %q{%s    %s(_)%s     %s    %s| |  %s     %s    %s      %s          %s} % colors
+    lines << %q{%s ____%s_%s _ __ %s ___%s| |_ %s_ __ %s___ %s __ _ %s_ __ ___  %s} % colors
+    lines << %q{%s|_  /%s %s| '_ \%s/ __|%s __|%s '__/%s _ \%s/ _` |%s '_ ` _ \ %s} % colors
+    lines << %q{%s / /%s| %s| |_) %s\__ \%s |_%s| | %s|  __/%s (_| |%s | | | | |%s} % colors
+    lines << %q{%s/___%s|_%s| .__/%s|___/%s\__|%s_|  %s\___|%s\__,_|%s_| |_| |_|%s} % colors
+    lines << %q{%s     %s %s| |   %s     %s    %s     %s    %s      %s          %s} % colors
+    lines << %q{%s     %s %s|_|   %s     %s    %s     %s    %s      %s          %s} % colors
 
     lines.join("\n")
   end
