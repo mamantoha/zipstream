@@ -2,5 +2,5 @@ version: 1.0
 shards:
   crystar:
     github: mamantoha/crystar
-    commit: cb2790bb49f1c3a4e2d2bfc5dca59798e21349cf
+    commit: 5b2e86d17f09ddcdc8af4bbde9941c5dbc10f8a6
 
