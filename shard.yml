@@ -6,14 +6,12 @@ authors:
 
 dependencies:
   crystar:
-    # github: naqvis/crystar
-    github: mamantoha/crystar
-    branch: crystal/0.35.0
+    github: naqvis/crystar
 
 targets:
   zipstream:
     main: src/zipstream_cli.cr
 
-crystal: 0.34.0
+crystal: 0.35.0
 
 license: MIT
