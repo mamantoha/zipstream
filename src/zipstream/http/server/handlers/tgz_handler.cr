@@ -35,7 +35,7 @@ module Zipstream
     end
 
     private def tar_directory!(path : String, io : IO)
-      Gzip::Writer.open(io) do |gzip|
+      Compress::Gzip::Writer.open(io) do |gzip|
         Crystar::Writer.open(gzip) do |tar|
           Dir[File.join(path, "**/*")].each do |entry|
             next unless File.readable?(entry)
@@ -72,7 +72,7 @@ module Zipstream
     private def tar_file!(file : String, io : IO)
       permissions = File.info(file).permissions.value.to_i64
 
-      Gzip::Writer.open(io) do |gzip|
+      Compress::Gzip::Writer.open(io) do |gzip|
         Crystar::Writer.open(gzip) do |tar|
           header = Crystar::Header.new(
             name: File.basename(file),

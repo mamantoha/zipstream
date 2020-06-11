@@ -1,5 +1,5 @@
-require "zip"
-require "gzip"
+require "compress/zip"
+require "compress/gzip"
 require "http/server"
 require "mime"
 require "option_parser"

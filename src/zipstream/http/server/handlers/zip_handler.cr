@@ -35,7 +35,7 @@ module Zipstream
     end
 
     private def zip_directory!(path : String, io : IO)
-      Zip::Writer.open(io) do |zip|
+      Compress::Zip::Writer.open(io) do |zip|
         Dir[File.join(path, "**/*")].each do |entry|
           next unless File.readable?(entry)
 
@@ -51,7 +51,7 @@ module Zipstream
     end
 
     private def zip_file!(file : String, io : IO)
-      Zip::Writer.open(io) do |zip|
+      Compress::Zip::Writer.open(io) do |zip|
         zip.add("/#{File.basename(file)}", File.read(file))
       end
     end
