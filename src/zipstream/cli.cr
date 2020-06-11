@@ -69,7 +69,7 @@ module Zipstream
             puts "ERROR: `#{name}` is not a valid url path, should contain only alphanumeric symbols"
             exit
           end
-          config.url_path = name
+          config.url_path = name unless config.web
         end
 
         parser.on("--user=user", "the username user for file retrieval") do |name|
