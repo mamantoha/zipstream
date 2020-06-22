@@ -7,11 +7,12 @@ authors:
 dependencies:
   crystar:
     github: naqvis/crystar
+    version: ">= 0.1.7"
 
 targets:
   zipstream:
     main: src/zipstream_cli.cr
 
-crystal: 0.35.0
+crystal: ">= 0.35.1"
 
 license: MIT
