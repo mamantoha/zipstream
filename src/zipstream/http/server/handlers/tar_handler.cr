@@ -35,52 +35,11 @@ module Zipstream
     end
 
     private def tar_directory!(path : String, io : IO)
-      Crystar::Writer.open(io) do |tar|
-        Dir[File.join(path, "**/*")].each do |entry|
-          next unless File.readable?(entry)
-
-          relative_path = entry.sub(path, "").lstrip("/")
-          permissions = File.info(entry).permissions.value.to_i64
-
-          if File.directory?(entry)
-            header = Crystar::Header.new(
-              name: "#{relative_path}/",
-              mode: permissions,
-              mod_time: File.info(entry).modification_time,
-              size: 0_i64
-            )
-
-            tar.write_header(header)
-            nil
-          else
-            header = Crystar::Header.new(
-              name: relative_path,
-              mode: permissions,
-              mod_time: File.info(entry).modification_time,
-              size: File.info(entry).size.to_i64
-            )
-
-            tar.write_header(header)
-            tar.write(File.read(entry).to_slice)
-          end
-        end
-      end
+      Zipstream::Helper.tar_directory!(path, io)
     end
 
-    private def tar_file!(file : String, io : IO)
-      permissions = File.info(file).permissions.value.to_i64
-
-      Crystar::Writer.open(io) do |tar|
-        header = Crystar::Header.new(
-          name: File.basename(file),
-          mode: permissions,
-          mod_time: File.info(file).modification_time,
-          size: File.info(file).size.to_i64
-        )
-
-        tar.write_header(header)
-        tar.write(File.read(file).to_slice)
-      end
+    private def tar_file!(path : String, io : IO)
+      Zipstream::Helper.tar_file!(path, io)
     end
   end
 end
