@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  release:
+    name: Publish for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            target_name: zipstream
+            asset_suffix: linux-amd64
+          - os: macos-latest
+            target_name: zipstream
+            asset_suffix: darwin-amd64
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Variables
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - uses: MeilCli/setup-crystal-action@v3.0.0
+      - name: Install macOS libraries
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: |
+          brew install llvm@10 pkg-config
+          brew reinstall openssl
+          brew link --force llvm@10
+      - name: Install dependencies
+        run: shards install
+      - name: Compile release
+        env:
+          LLVM_CONFIG: /usr/local/opt/llvm/bin/llvm-config
+          PKG_CONFIG_PATH: /usr/local/opt/openssl/lib/pkgconfig
+        run: |
+          crystal -v
+          shards build --release -Dpreview_mt
+      - name: Add binaries to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: bin/${{ matrix.target_name }}
+          asset_name: ${{ matrix.target_name }}_${{ steps.vars.outputs.tag }}_${{ matrix.asset_suffix }}
+          tag: ${{ github.ref }}
+          overwrite: true
