@@ -1,7 +1,7 @@
 # zipstream
 
 [![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=?style=plastic&logo=appveyor)](https://crystal-lang.org/)
-[![Build Status](https://travis-ci.org/mamantoha/zipstream.svg?branch=master)](https://travis-ci.org/mamantoha/zipstream)
+![Crystal CI](https://github.com/mamantoha/zipstream/workflows/Crystal%20CI/badge.svg)
 [![zipstream](https://snapcraft.io/zipstream/badge.svg)](https://snapcraft.io/zipstream)
 [![Snap Status](https://build.snapcraft.io/badge/mamantoha/zipstream.svg)](https://build.snapcraft.io/user/mamantoha/zipstream)
 
