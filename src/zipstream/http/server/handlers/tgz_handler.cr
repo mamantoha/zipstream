@@ -1,6 +1,9 @@
+require "./tar_helper"
+
 module Zipstream
   class TgzHandler
     include HTTP::Handler
+    include Zipstream::TarHelper
 
     property config
 
@@ -21,10 +24,12 @@ module Zipstream
         reader.close
       end
 
-      if File.directory?(config.path)
-        tgz_directory!(config.path, writer)
-      else
-        tgz_file!(config.path, writer)
+      Compress::Gzip::Writer.open(writer) do |gzip|
+        if File.directory?(config.path)
+          tar_directory!(config.path, gzip)
+        else
+          tar_file!(config.path, gzip)
+        end
       end
 
       writer.close
@@ -32,18 +37,6 @@ module Zipstream
       Fiber.yield
 
       call_next(context)
-    end
-
-    private def tgz_directory!(path : String, io : IO)
-      Compress::Gzip::Writer.open(io) do |gzip|
-        Zipstream::Helper.tar_directory!(path, gzip)
-      end
-    end
-
-    private def tgz_file!(path : String, io : IO)
-      Compress::Gzip::Writer.open(io) do |gzip|
-        Zipstream::Helper.tar_file!(path, gzip)
-      end
     end
   end
 end

@@ -1,6 +1,9 @@
+require "./tar_helper"
+
 module Zipstream
   class TarHandler
     include HTTP::Handler
+    include Zipstream::TarHelper
 
     property config
 
@@ -32,14 +35,6 @@ module Zipstream
       Fiber.yield
 
       call_next(context)
-    end
-
-    private def tar_directory!(path : String, io : IO)
-      Zipstream::Helper.tar_directory!(path, io)
-    end
-
-    private def tar_file!(path : String, io : IO)
-      Zipstream::Helper.tar_file!(path, io)
     end
   end
 end

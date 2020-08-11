@@ -72,6 +72,10 @@ module Zipstream
           config.url_path = name unless config.web
         end
 
+        parser.on("-j", "--junk-parent", "stream the content of an archive without including the parent directory") do
+          config.junk = true
+        end
+
         parser.on("--user=user", "the username user for file retrieval") do |name|
           config.user = name
         end
@@ -98,6 +102,7 @@ module Zipstream
       optparse.parse
 
       config.path = File.expand_path(ARGV.pop? || config.path, Dir.current)
+      config.prefix = File.directory?(config.path) && !config.junk ? Path[config.path].basename : nil
 
       unless File.exists?(config.path)
         puts "Path `#{config.path}` does not exist"
