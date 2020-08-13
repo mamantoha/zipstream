@@ -7,7 +7,7 @@ authors:
 dependencies:
   crystar:
     github: naqvis/crystar
-    version: ">= 0.1.7"
+    version: ">= 0.1.8"
 
 targets:
   zipstream:

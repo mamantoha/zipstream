@@ -2,5 +2,5 @@ version: 2.0
 shards:
   crystar:
     git: https://github.com/naqvis/crystar.git
-    version: 0.1.7
+    version: 0.1.8
 
