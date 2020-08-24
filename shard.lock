@@ -1,5 +1,9 @@
 version: 2.0
 shards:
+  cr_zip_tricks:
+    path: ../cr_zip_tricks
+    version: 0.2.0
+
   crystar:
     git: https://github.com/naqvis/crystar.git
     version: 0.1.8

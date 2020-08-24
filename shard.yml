@@ -8,6 +8,8 @@ dependencies:
   crystar:
     github: naqvis/crystar
     version: ">= 0.1.8"
+  cr_zip_tricks:
+    path: ../cr_zip_tricks
 
 targets:
   zipstream:
