@@ -36,7 +36,7 @@ module Zipstream
 
     private def zip_directory!(path : String, io : IO)
       ZipTricks::Streamer.archive(io) do |zip|
-        Dir.glob(File.join(path, "**/*")).each do |entry|
+        Dir.glob(File.join(path, "**/*"), match_hidden: config.hidden).each do |entry|
           next unless File.readable?(entry)
 
           relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")

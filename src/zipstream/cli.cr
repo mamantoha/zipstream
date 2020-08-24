@@ -76,6 +76,10 @@ module Zipstream
           config.junk = true
         end
 
+        parser.on("-h", "--hidden", "match hidden files and folders") do
+          config.hidden = true
+        end
+
         parser.on("--user=user", "the username user for file retrieval") do |name|
           config.user = name
         end
