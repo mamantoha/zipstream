@@ -35,16 +35,16 @@ module Zipstream
     end
 
     private def zip_directory!(path : String, io : IO)
-      ZipTricks::Streamer.archive(io) do |s|
+      ZipTricks::Streamer.archive(io) do |zip|
         Dir[File.join(path, "**/*")].each do |entry|
           next unless File.readable?(entry)
 
           relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
 
           if File.directory?(entry)
-            s.add_stored("#{relative_path}/") { }
+            zip.add_stored("#{relative_path}/") { }
           else
-            s.add_deflated(relative_path) do |sink|
+            zip.add_deflated(relative_path) do |sink|
               sink << File.read(entry)
             end
           end
@@ -53,8 +53,8 @@ module Zipstream
     end
 
     private def zip_file!(file : String, io : IO)
-      ZipTricks::Streamer.archive(io) do |s|
-        s.add_deflated("/#{File.basename(file)}") do |sink|
+      ZipTricks::Streamer.archive(io) do |zip|
+        zip.add_deflated("/#{File.basename(file)}") do |sink|
           sink << File.read(file)
         end
       end
