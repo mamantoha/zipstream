@@ -39,7 +39,7 @@ module Zipstream
         Dir[File.join(path, "**/*")].each do |entry|
           next unless File.readable?(entry)
 
-          relative_path = entry.sub(path, "")
+          relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
 
           if File.directory?(entry)
             zip.add_dir(relative_path)

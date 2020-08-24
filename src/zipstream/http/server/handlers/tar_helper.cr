@@ -1,13 +1,12 @@
 module Zipstream
-  module Helper
-    extend self
-
+  module TarHelper
     def tar_directory!(path : String, io)
       Crystar::Writer.open(io) do |tar|
         Dir[File.join(path, "**/*")].each do |entry|
           next unless File.readable?(entry)
 
-          relative_path = entry.sub(path, "").lstrip("/")
+          relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
+
           permissions = File.info(entry).permissions.value.to_i64
 
           if File.directory?(entry)
