@@ -2,8 +2,8 @@
 
 [![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=?style=plastic&logo=appveyor)](https://crystal-lang.org/)
 ![Crystal CI](https://github.com/mamantoha/zipstream/workflows/Crystal%20CI/badge.svg)
-[![zipstream](https://snapcraft.io/zipstream/badge.svg)](https://snapcraft.io/zipstream)
-[![Snap Status](https://build.snapcraft.io/badge/mamantoha/zipstream.svg)](https://build.snapcraft.io/user/mamantoha/zipstream)
+[![zipstream](https://snapcraft.io//zipstream/badge.svg)](https://snapcraft.io/zipstream)
+[![zipstream](https://snapcraft.io//zipstream/trending.svg?name=0)](https://snapcraft.io/zipstream)
 
 A command line tool that allows you to easily share files and directories over the network
 
