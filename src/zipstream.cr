@@ -1,9 +1,9 @@
-require "compress/zip"
 require "compress/gzip"
 require "http/server"
 require "mime"
 require "option_parser"
 require "crystar"
+require "cr_zip_tricks"
 
 require "./zipstream/**"
 

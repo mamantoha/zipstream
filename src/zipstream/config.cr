@@ -15,6 +15,7 @@ module Zipstream
     property password : String? = nil
     property prefix : String? = nil
     property junk : Bool = false
+    property hidden : Bool = false
 
     def initialize
       @host = "0.0.0.0"

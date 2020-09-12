@@ -64,6 +64,8 @@ OPTIONS
     -f FORMAT, --format=FORMAT       the format of output archive, zip, tar or tgz. Only for CLI mode. (default: `zip`)
     -o FILENAME, --output=FILENAME   the output file name without extension. Only for CLI mode. (default: `download`)
     -e PATH, --endpoint=PATH         the URL path to the resource. Only for CLI mode. (default: ``)
+    -j, --junk-parent                stream the content of an archive without including the parent directory
+    -h, --hidden                     match hidden files and folders
     --user=user                      the username user for file retrieval
     --password=password              the password password for file retrieval
     -V, --version                    print program version
