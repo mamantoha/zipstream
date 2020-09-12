@@ -27,7 +27,7 @@ jobs:
       - name: Variables
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-      - uses: MeilCli/setup-crystal-action@v3.0.0
+      - uses: MeilCli/setup-crystal-action@v4
       - name: Install macOS libraries
         if: ${{ matrix.os == 'macos-latest' }}
         run: |
