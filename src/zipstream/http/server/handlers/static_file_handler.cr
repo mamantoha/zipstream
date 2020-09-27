@@ -19,10 +19,13 @@ module Zipstream
     #
     # If *directory_listing* is `false`, directory listing is disabled. This means that
     # paths matching directories are ignored and next handler is called.
-    def initialize(public_dir : String, fallthrough = true, directory_listing = true)
+    #
+    # If *match_hidden* is `true` the pattern will match hidden files and folders.
+    def initialize(public_dir : String, fallthrough = true, directory_listing = true, match_hidden = false)
       @public_dir = Path.new(public_dir).expand
       @fallthrough = !!fallthrough
       @directory_listing = !!directory_listing
+      @match_hidden = match_hidden
     end
 
     def call(context)
@@ -66,7 +69,7 @@ module Zipstream
 
       if @directory_listing && is_dir
         context.response.content_type = "text/html"
-        directory_listing(context.response, request_path, file_path)
+        directory_listing(context.response, request_path, file_path, @match_hidden)
       elsif is_file
         last_modified = modification_time(file_path)
         add_cache_headers(context.response.headers, last_modified)
@@ -130,9 +133,11 @@ module Zipstream
       File.info(file_path).modification_time
     end
 
-    record DirectoryListing, request_path : String, path : String do
+    record DirectoryListing, request_path : String, path : String, match_hidden : Bool do
       def each_file
         Dir.children(path).sort_by(&.downcase).each do |entry|
+          next if !match_hidden && entry.starts_with?('.')
+
           file_path = File.join(path, entry)
           next unless File.readable?(file_path)
           file = File.new(file_path)
@@ -145,8 +150,8 @@ module Zipstream
       ECR.def_to_s "#{__DIR__}/static_file_handler.html"
     end
 
-    private def directory_listing(io, request_path, path)
-      DirectoryListing.new(request_path.to_s, path.to_s).to_s(io)
+    private def directory_listing(io, request_path, path, match_hidden)
+      DirectoryListing.new(request_path.to_s, path.to_s, match_hidden).to_s(io)
     end
   end
 end
