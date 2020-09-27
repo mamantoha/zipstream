@@ -58,7 +58,7 @@ If PATH is not specified it point to current directory
 OPTIONS
     -h, --help                       give this help list
     -l, --log                        logging of requests/responses
-    -w, --web                        run WEB Server with the directory listing (default: CLI mode)
+    -w, --web                        run WEB Server with the directory listing
     -H HOST, --host=HOST             the host (default: `0.0.0.0`)
     -p PORT, --port=PORT             the port (default: `8090`)
     -f FORMAT, --format=FORMAT       the format of output archive, zip, tar or tgz. Only for CLI mode. (default: `zip`)
