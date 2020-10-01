@@ -28,12 +28,6 @@ jobs:
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - uses: MeilCli/setup-crystal-action@v4
-      - name: Install macOS libraries
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: |
-          brew install llvm@10 pkg-config
-          brew reinstall openssl
-          brew link --force llvm@10
       - name: Install dependencies
         run: shards install
       - name: Compile release
