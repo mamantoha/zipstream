@@ -2,6 +2,7 @@
 
 [![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=?style=plastic&logo=appveyor)](https://crystal-lang.org/)
 ![Crystal CI](https://github.com/mamantoha/zipstream/workflows/Crystal%20CI/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/mamantoha/zipstream.svg)](https://github.com/mamantoha/zipstream/releases)
 [![zipstream](https://snapcraft.io//zipstream/badge.svg)](https://snapcraft.io/zipstream)
 [![zipstream](https://snapcraft.io//zipstream/trending.svg?name=0)](https://snapcraft.io/zipstream)
 
