@@ -9,8 +9,10 @@ dependencies:
     github: naqvis/crystar
     version: ">= 0.1.9"
   cr_zip_tricks:
-    github: WeTransfer/cr_zip_tricks
-    branch: master
+    # github: WeTransfer/cr_zip_tricks
+    # branch: master
+    github: mamantoha/cr_zip_tricks
+    branch: crystal/1.0.0
 
 targets:
   zipstream:

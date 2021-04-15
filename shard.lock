@@ -1,8 +1,8 @@
 version: 2.0
 shards:
   cr_zip_tricks:
-    git: https://github.com/wetransfer/cr_zip_tricks.git
-    version: 0.2.0+git.commit.2efcb646558bdbac411732704d834e5a3d6012a1
+    git: https://github.com/mamantoha/cr_zip_tricks.git
+    version: 0.2.0+git.commit.ddef3b9ec9080a613af81ff02fc14161391a6efc
 
   crystar:
     git: https://github.com/naqvis/crystar.git
