@@ -6,5 +6,5 @@ shards:
 
   crystar:
     git: https://github.com/naqvis/crystar.git
-    version: 0.1.9
+    version: 0.2.0
 
