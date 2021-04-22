@@ -1,5 +1,5 @@
 module Zipstream
-  class BeforeHandler
+  class BeforeStaticFileHandler
     include HTTP::Handler
 
     property config
@@ -8,15 +8,17 @@ module Zipstream
     end
 
     def call(context)
-      decoded_path = URI.decode(context.request.path)
-
-      if decoded_path != "/#{config.url_path}"
+      if !config.hidden && hidden?(context)
         context.response.respond_with_status(:not_found)
 
         return
       end
 
       call_next(context)
+    end
+
+    private def hidden?(context)
+      context.request.path.split("/").any?(&.starts_with?("."))
     end
   end
 end
