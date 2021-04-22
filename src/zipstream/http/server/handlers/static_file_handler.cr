@@ -54,7 +54,7 @@ module Zipstream
       expanded_path = request_path.expand("/")
 
       file_path = @public_dir.join(expanded_path.to_kind(Path::Kind.native))
-      is_dir = Dir.exists? file_path
+      is_dir = Dir.exists?(file_path)
       is_file = !is_dir && File.exists?(file_path)
 
       if request_path != expanded_path || is_dir && !is_dir_path
@@ -81,6 +81,7 @@ module Zipstream
 
         context.response.content_type = MIME.from_filename(file_path.to_s, "document")
         context.response.content_length = File.size(file_path)
+
         File.open(file_path) do |file|
           IO.copy(file, context.response)
         end
@@ -139,8 +140,11 @@ module Zipstream
           next if !match_hidden && entry.starts_with?('.')
 
           file_path = File.join(path, entry)
+
           next unless File.readable?(file_path)
+
           file = File.new(file_path)
+
           yield file
         rescue File::AccessDeniedError
           next
