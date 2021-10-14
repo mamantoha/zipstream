@@ -1,7 +1,0 @@
-Metrics/CyclomaticComplexity:
-  Description: Disallows methods with a cyclomatic complexity higher than `MaxComplexity`
-  MaxComplexity: 10
-  Excluded:
-  - src/zipstream/http/server/handlers/static_file_handler.cr
-  Enabled: true
-  Severity: Convention
