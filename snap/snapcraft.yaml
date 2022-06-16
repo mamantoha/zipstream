@@ -13,8 +13,9 @@ description: |
   to the `removable-media` interface by running the following command in a terminal
 
   `sudo snap connect zipstream:removable-media`
+icon: snap/gui/logo.png
 contact: anton.maminov@gmai.com
-
+type: app
 
 grade: stable
 confinement: strict
