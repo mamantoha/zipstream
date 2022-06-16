@@ -13,10 +13,19 @@ description: |
   to the `removable-media` interface by running the following command in a terminal
 
   `sudo snap connect zipstream:removable-media`
+contact: anton.maminov@gmai.com
+
 
 grade: stable
 confinement: strict
 architectures: [amd64]
+compression: lzo
+
+license: MIT
+
+website: https://github.com/mamantoha/zipstream
+issues: https://github.com/mamantoha/zipstream/issues
+source-code: https://github.com/mamantoha/zipstream.git
 
 apps:
   zipstream:
