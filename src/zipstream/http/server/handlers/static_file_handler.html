@@ -101,7 +101,7 @@
 
 <body>
   <h1>Index of <%= HTML.escape request_path %></h1>
-  <% encoded_request_path = URI.encode(request_path) %>
+  <% encoded_request_path = URI.encode_path(request_path) %>
 
   <% unless request_path == "/" %>
     <div id="parentDirLinkBox" style="display: block;">
@@ -243,8 +243,8 @@
     <% entry = File.basename(file.path) %>
     <script>
       addRow(
-        "<%= HTML.escape entry %>",
-        "<%= URI.encode entry %>",
+        "<%= HTML.escape(entry) %>",
+        "<%= URI.encode_path(entry) %>",
         <%= file.info.directory? %>,
         <%= file.info.size %>,
         "<%= file.info.size.humanize_bytes %>",

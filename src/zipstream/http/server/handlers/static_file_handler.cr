@@ -99,7 +99,7 @@ module Zipstream
     private def redirect_to(context, url)
       context.response.status = :found
 
-      url = URI.encode(url.to_s)
+      url = URI.encode_path(url.to_s)
       context.response.headers.add "Location", url
     end
 
