@@ -40,7 +40,6 @@ module Zipstream
       end
 
       original_path = context.request.path.not_nil!
-      is_dir_path = original_path.ends_with?("/")
       request_path = self.request_path(URI.decode(original_path))
 
       # File path cannot contains '\0' (NUL) because all filesystem I know
@@ -54,18 +53,15 @@ module Zipstream
       expanded_path = request_path.expand("/")
 
       file_path = @public_dir.join(expanded_path.to_kind(Path::Kind.native))
-      is_dir = Dir.exists?(file_path)
-      is_file = !is_dir && File.exists?(file_path)
 
-      if request_path != expanded_path || is_dir && !is_dir_path
-        redirect_path = expanded_path
-        if is_dir && !is_dir_path
-          # Append / to path if missing
-          redirect_path = expanded_path.join("")
-        end
-        redirect_to context, redirect_path
+      unless File.exists?(file_path)
+        context.response.respond_with_status(:not_found)
+
         return
       end
+
+      is_dir = File.directory?(file_path)
+      is_file = File.file?(file_path)
 
       if @directory_listing && is_dir
         context.response.content_type = "text/html"
