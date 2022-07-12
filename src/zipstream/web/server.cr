@@ -12,7 +12,7 @@ module Zipstream
           handlers << LogHandler.new
         end
 
-        handlers << BeforeStaticFileHandler.new(config)
+        handlers << HiddenStaticFileHandler.new(config)
 
         if config.basic_auth?
           handlers << BasicAuthHandler.new(config.user.not_nil!, config.password.not_nil!)
