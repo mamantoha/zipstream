@@ -7,7 +7,7 @@ authors:
 dependencies:
   crystar:
     github: naqvis/crystar
-    version: ">= 0.1.9"
+    branch: master
   zip64:
     github: crystal-garage/crystal-zip64
     version: ">= 0.2.0"
