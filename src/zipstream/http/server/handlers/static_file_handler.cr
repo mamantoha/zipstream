@@ -147,7 +147,7 @@ module Zipstream
         end
       end
 
-      ECR.def_to_s "#{__DIR__}/static_file_handler.html"
+      ECR.def_to_s "#{__DIR__}/static_file_handler.html.ecr"
     end
 
     private def directory_listing(io, request_path, path, match_hidden)
