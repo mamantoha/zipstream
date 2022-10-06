@@ -8,9 +8,9 @@ dependencies:
   crystar:
     github: naqvis/crystar
     version: ">= 0.1.9"
-  cr_zip_tricks:
-    github: WeTransfer/cr_zip_tricks
-    version: ">= 0.3.0"
+  zip64:
+    github: crystal-garage/crystal-zip64
+    branch: main
 
 targets:
   zipstream:
