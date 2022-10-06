@@ -10,7 +10,7 @@ dependencies:
     version: ">= 0.1.9"
   zip64:
     github: crystal-garage/crystal-zip64
-    branch: main
+    version: ">= 0.2.0"
 
 targets:
   zipstream:

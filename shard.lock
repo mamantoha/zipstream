@@ -6,5 +6,5 @@ shards:
 
   zip64:
     git: https://github.com/crystal-garage/crystal-zip64.git
-    version: 0.1.0+git.commit.7ec9853ae84719c505888ce48b0fa32bd12008a5
+    version: 0.2.0
 
