@@ -1,5 +1,5 @@
 module Zipstream
-  class BeforeStaticFileHandler
+  class HiddenStaticFileHandler
     include HTTP::Handler
 
     property config
