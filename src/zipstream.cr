@@ -58,7 +58,7 @@ module Zipstream
     puts message(address)
 
     if config.qr
-      puts "Or scan the QR code to access `#{config.remote_url}` on your phone"
+      puts "Or scan the QR code to access to download the file on your phone"
       puts generate_qr_code(config.remote_url)
     end
 

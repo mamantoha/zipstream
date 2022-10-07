@@ -100,7 +100,7 @@ wget -O- --user admin --password passwd http://192.168.31.180:8090/dl | tar -xvf
 curl --user admin:passwd http://192.168.31.180:8090/dl | tar -xvf -
 
 Or just open in your browser: `http://admin:passwd@192.168.31.180:8090/dl`
-Or scan the QR code to access `http://admin:passwd@192.168.31.180:8090/dl` on your phone
+Or scan the QR code to access to download the file on your phone
 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 █ ▄▄▄▄▄ █▄ ▄ ▄ ▄▄▀█▄▀▀ █ ▄ ▄█▀█ ▄▄▄▄▄ █
 █ █   █ █▄▀▄ ▄▀█ ▀▀▀▀▄█▄▄▄▀ █ █ █   █ █
