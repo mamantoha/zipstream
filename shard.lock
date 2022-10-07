@@ -4,6 +4,10 @@ shards:
     git: https://github.com/naqvis/crystar.git
     version: 0.2.0+git.commit.56db8bb9dfbd5ed6d7908353405a5fae632a6561
 
+  qr-code:
+    git: https://github.com/spider-gazelle/qr-code.git
+    version: 1.0.2
+
   zip64:
     git: https://github.com/crystal-garage/crystal-zip64.git
     version: 0.2.0

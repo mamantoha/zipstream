@@ -88,6 +88,10 @@ module Zipstream
           config.password = name
         end
 
+        parser.on("--qr", "print QR-Code to access shared resource") do
+          config.qr = true
+        end
+
         parser.on("-V", "--version", "print program version") do
           default_target = Crystal::DESCRIPTION.split.last
 

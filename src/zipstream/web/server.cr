@@ -28,9 +28,6 @@ module Zipstream
           exit
         end
 
-        puts "Serving `#{config.path}` at http://#{address}/#{config.url_path}"
-        puts
-
         shutdown = ->(_s : Signal) do
           puts
           puts "See you later, alligator!"

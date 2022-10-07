@@ -6,6 +6,7 @@ module Zipstream
     property port
     property log : Bool = false
     property web : Bool = false
+    property qr : Bool = false
     property output
     property format
     property path
