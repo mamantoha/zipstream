@@ -29,15 +29,27 @@ module Zipstream
     end
 
     def filename
-      [@output, @format].join(".")
+      [output, format].join(".")
     end
 
     def basic_auth?
-      @user && @password
+      user && password
     end
 
     def self.release_date
       {{ `date -R`.stringify.chomp }}
+    end
+
+    def remote_url : String
+      address = Socket::IPAddress.new(host, port)
+
+      String.build do |str|
+        str << "http://"
+        str << "#{user}:#{password}@" if basic_auth?
+        str << address
+        str << '/'
+        str << url_path
+      end
     end
   end
 end

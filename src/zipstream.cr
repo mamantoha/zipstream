@@ -58,8 +58,8 @@ module Zipstream
     puts message(address)
 
     if config.qr
-      puts "Or scan the QR code to access `#{remote_url}` on your phone"
-      puts generate_qr_code(remote_url)
+      puts "Or scan the QR code to access `#{config.remote_url}` on your phone"
+      puts generate_qr_code(config.remote_url)
     end
 
     shutdown = ->(_s : Signal) do
@@ -86,11 +86,11 @@ module Zipstream
     puts "Serving `#{config.path}`"
     puts
 
-    puts "Open in your browser: `#{remote_url}`"
+    puts "Open in your browser: `#{config.remote_url}`"
 
     if config.qr
-      puts "Or scan the QR code to access `#{remote_url}` on your phone"
-      puts generate_qr_code(remote_url)
+      puts "Or scan the QR code to access `#{config.remote_url}` on your phone"
+      puts generate_qr_code(config.remote_url)
     end
 
     server.run unless config.env == "test"
@@ -131,15 +131,9 @@ module Zipstream
     end
 
     message.puts ""
-    message.puts "Or just open in your browser: `#{remote_url}`"
+    message.puts "Or just open in your browser: `#{config.remote_url}`"
 
     message.to_s
-  end
-
-  private def remote_url : String
-    address = Socket::IPAddress.new(config.host, config.port)
-
-    "http://#{address}/#{config.url_path}"
   end
 
   private def wget_command(address, extract = false)
