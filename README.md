@@ -70,13 +70,14 @@ OPTIONS
     -h, --hidden                     match hidden files and folders
     --user=user                      the username user for file retrieval
     --password=password              the password password for file retrieval
+    --qr                             print QR-Code to access shared resource
     -V, --version                    print program version
 ```
 
 Sharing a directory as tar archive:
 
 ```console
-$ zipstream -f tar /media/disk/music --user=admin --password=passwd -o music -e dl
+$ zipstream -H 192.168.31.180 -f tar /Users --user=admin --password=passwd -o users -e dl --qr
      _           _
     (_)         | |
  _____ _ __  ___| |_ _ __ ___  __ _ _ __ ___
@@ -86,19 +87,41 @@ $ zipstream -f tar /media/disk/music --user=admin --password=passwd -o music -e 
       | |
       |_|
 
-Serving `/media/disk/music` as `music.tar`
+Serving `/Users` as `users.tar`
 
 To download the file please use one of the commands below:
 
-wget --content-disposition --user admin --password passwd http://0.0.0.0:8090/dl
-curl -OJ --user admin:passwd http://0.0.0.0:8090/dl
+wget --content-disposition --user admin --password passwd http://192.168.31.180:8090/dl
+curl -OJ --user admin:passwd http://192.168.31.180:8090/dl
 
 Or place all files into current folder:
 
-wget -O- --user admin --password passwd http://0.0.0.0:8090/dl | tar -xvf -
-curl --user admin:passwd http://0.0.0.0:8090/dl | tar -xvf -
+wget -O- --user admin --password passwd http://192.168.31.180:8090/dl | tar -xvf -
+curl --user admin:passwd http://192.168.31.180:8090/dl | tar -xvf -
 
-Or just open in browser: http://0.0.0.0:8090/dl
+Or just open in your browser: `http://admin:passwd@192.168.31.180:8090/dl`
+Or scan the QR code to access `http://admin:passwd@192.168.31.180:8090/dl` on your phone
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█ ▄▄▄▄▄ █▄ ▄ ▄ ▄▄▀█▄▀▀ █ ▄ ▄█▀█ ▄▄▄▄▄ █
+█ █   █ █▄▀▄ ▄▀█ ▀▀▀▀▄█▄▄▄▀ █ █ █   █ █
+█ █▄▄▄█ █▄▀▀▀  █▄▄█▀▀█ ▀▀▄█ █ █ █▄▄▄█ █
+█▄▄▄▄▄▄▄█ ▀ █ █▄▀▄▀▄█ █▄▀ █▄▀ █▄▄▄▄▄▄▄█
+█▀█▀██▄▄█▀▀▀ ▄█ █▀▄▄▄ ▀█▄▄▄ ▀█▀▄█ █ ▀▄█
+███▀▀█▀▄█▀ ▀▄▀▄█▄█  ▄▄▄▀▄ █▀  █ ██▄█▀ █
+███▀▀█ ▄█▄ █ ▀ █ ██ ▀▄ ▄ ▄██▀█ ▄███▀▄██
+█▀▄ ▄▄▄▄▄▄▀ ▄█   ▄▄ █▄ █▀██  █▀ ▄▀ ▀  █
+█ ▄▀█ ▀▄ ▄█▀ ▀███▀▄▀█████▄█▄▀  ▄▀▄▀ ███
+█ █ █ ▄▄▀███ ███▄ ▀▀  █ █▄▄  ██▄▄▄▄██▄█
+█▀▀ █▄▀▄ █▄   ▀▀ ██▀▀▀ ▀▀█ ▀ ▀▀▄  █ ▀██
+█▄▀▄ ▄▀▄▀ ▄▀████▀ ▄ ▀▀▄▀  █▄  ▀▀▀█▄▄█ █
+█▀▀▄▀▀▄▄▀ ██▄▄▄▀  ▀▄█▀▄█▄▀▄▄▀▄ ▄██▄▀ ██
+█ █▀ ▄▄▄▀▄ ▄▀ ▄█ ███ ██ █▀█ ▄▀████▄ ▀ █
+█▄██▄▄█▄▄ ▀█ █▄█ ▀██▄██ ▀▀▄▄▄ ▄▄▄ ▀▄█▄█
+█ ▄▄▄▄▄ █▀▄▀▄ ▄█▄▀   ▄▀▄▄▀▄▄█ █▄█  ▄▀ █
+█ █   █ ███▄▀▄▀▄▄█▀█▄▄▀██▄ █▄ ▄  ▄█▄▄██
+█ █▄▄▄█ ██▄█▀  ▀▄ █▀ ▄▀█ ▄▄▄  █▀█▀ ▄█ █
+█▄▄▄▄▄▄▄██▄▄███▄▄█▄█▄█▄▄███▄█▄███████▄█
+
 ```
 
 Run an ad hoc http static server in specified directory, available at <http://localhost:8090>:

@@ -11,6 +11,8 @@ dependencies:
   zip64:
     github: crystal-garage/crystal-zip64
     version: ">= 0.2.0"
+  qr-code:
+    github: spider-gazelle/qr-code
 
 targets:
   zipstream:
