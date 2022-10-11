@@ -70,6 +70,7 @@ OPTIONS
     -h, --hidden                     match hidden files and folders
     --user=user                      the username user for file retrieval
     --password=password              the password password for file retrieval
+    --no-banner                      hide the ASCII art banner
     --qr                             print QR-Code to access shared resource
     -V, --version                    print program version
 ```
