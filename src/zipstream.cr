@@ -49,8 +49,10 @@ module Zipstream
       exit
     end
 
-    puts banner
-    puts
+    unless config.no_banner
+      puts banner
+      puts
+    end
 
     puts "Serving `#{config.path}` as `#{config.filename}`"
     puts

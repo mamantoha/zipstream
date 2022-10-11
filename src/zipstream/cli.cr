@@ -88,6 +88,10 @@ module Zipstream
           config.password = name
         end
 
+        parser.on("--no-banner", "hide the ASCII art banner") do
+          config.no_banner = true
+        end
+
         parser.on("--qr", "print QR-Code to access shared resource") do
           config.qr = true
         end
