@@ -1,5 +1,5 @@
 name: zipstream
-version: 0.19.0
+version: 0.19.1
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
@@ -18,6 +18,6 @@ targets:
   zipstream:
     main: src/zipstream_cli.cr
 
-crystal: 1.6.0
+crystal: 1.6.1
 
 license: MIT
