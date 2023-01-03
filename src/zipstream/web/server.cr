@@ -15,7 +15,7 @@ module Zipstream
         handlers << HiddenStaticFileHandler.new(config)
 
         if config.basic_auth?
-          handlers << BasicAuthHandler.new(config.user.not_nil!, config.password.not_nil!)
+          handlers << BasicAuthHandler.new(config.user.to_s, config.password.to_s)
         end
 
         handlers << StaticFileHandler.new(config.path, match_hidden: config.hidden?)
