@@ -6,7 +6,7 @@ on:
       - "*"
 
 jobs:
-  release:
+  release_x64:
     name: Publish for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
@@ -23,13 +23,13 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Variables
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - uses: MeilCli/setup-crystal-action@v4
       - name: Install dependencies
-        run: shards install
+        run: shards install --without-development
       - name: Compile release
         env:
           LLVM_CONFIG: /usr/local/opt/llvm/bin/llvm-config
@@ -37,7 +37,7 @@ jobs:
         run: |
           crystal -v
           shards build --release -Dpreview_mt
-          strip bin/zipstream
+          strip bin/${{ matrix.target_name }}
       - name: Add binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -46,3 +46,39 @@ jobs:
           asset_name: ${{ matrix.target_name }}_${{ steps.vars.outputs.tag }}_${{ matrix.asset_suffix }}
           tag: ${{ github.ref }}
           overwrite: true
+
+  release_arm:
+    name: Publish for ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ARM64]
+        include:
+          - os: ARM64
+            target_name: zipstream
+            asset_suffix: darwin-arm64
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Mac Build ARM
+        if: matrix.os == 'ARM64'
+        run: |
+          brew install crystal
+          crystal -v
+          shards install --without-development
+          shards build --release -Dpreview_mt
+          chmod +x bin/${{ matrix.target_name }}
+          cp bin/${{ matrix.target_name }} ${{ matrix.target_name }}-${{ matrix.asset_suffix }}
+          gh release create ${{ env.VERSION }} -n "${{ env.MESSAGE }}" -t "${{ env.NAME }}" || true
+          gh release upload ${{ env.VERSION }} ${{ env.FILES }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.ref_name }}
+          MESSAGE: "WIP"
+          NAME: ${{ github.ref_name }}
+          FILES: ${{ matrix.target_name }}-${{ matrix.asset_suffix }}
