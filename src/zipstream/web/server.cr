@@ -21,7 +21,7 @@ module Zipstream
         handlers << StaticFileHandler.new(config.path, match_hidden: config.hidden?)
 
         server = HTTP::Server.new(handlers)
-        address = server.bind_tcp(config.host, config.port)
+        server.bind_tcp(config.host, config.port)
 
         unless File.readable?(config.path)
           puts "#{config.path} : Permission denied"
