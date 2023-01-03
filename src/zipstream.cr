@@ -82,8 +82,10 @@ module Zipstream
   def run_web
     server = Zipstream::Web::Server.new
 
-    puts banner
-    puts
+    unless config.no_banner?
+      puts banner
+      puts
+    end
 
     puts "Serving `#{config.path}`"
     puts
