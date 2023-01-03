@@ -18,7 +18,7 @@ module Zipstream
   def run
     CLI.new
 
-    if config.web
+    if config.web?
       run_web
     else
       run_cli
@@ -28,7 +28,7 @@ module Zipstream
   def run_cli
     handlers = [] of HTTP::Handler
 
-    if config.log
+    if config.log?
       handlers << LogHandler.new
     end
 
@@ -49,7 +49,7 @@ module Zipstream
       exit
     end
 
-    unless config.no_banner
+    unless config.no_banner?
       puts banner
       puts
     end
@@ -59,7 +59,7 @@ module Zipstream
 
     puts message(address)
 
-    if config.qr
+    if config.qr?
       puts "Or scan the QR code to access to download the file on your phone"
       puts generate_qr_code(config.remote_url)
     end
@@ -90,7 +90,7 @@ module Zipstream
 
     puts "Open in your browser: `#{config.remote_url}`"
 
-    if config.qr
+    if config.qr?
       puts "Or scan the QR code to access `#{config.remote_url}` on your phone"
       puts generate_qr_code(config.remote_url)
     end

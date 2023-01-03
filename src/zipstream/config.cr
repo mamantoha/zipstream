@@ -4,9 +4,9 @@ module Zipstream
 
     property host
     property port
-    property log : Bool = false
-    property web : Bool = false
-    property qr : Bool = false
+    property? log : Bool = false
+    property? web : Bool = false
+    property? qr : Bool = false
     property output
     property format
     property path
@@ -15,9 +15,9 @@ module Zipstream
     property user : String? = nil
     property password : String? = nil
     property prefix : String? = nil
-    property junk : Bool = false
-    property hidden : Bool = false
-    property no_banner : Bool = false
+    property? junk : Bool = false
+    property? hidden : Bool = false
+    property? no_banner : Bool = false
 
     def initialize
       @host = "0.0.0.0"

@@ -8,7 +8,7 @@ module Zipstream
       def run
         handlers = [] of HTTP::Handler
 
-        if config.log
+        if config.log?
           handlers << LogHandler.new
         end
 
@@ -18,7 +18,7 @@ module Zipstream
           handlers << BasicAuthHandler.new(config.user.not_nil!, config.password.not_nil!)
         end
 
-        handlers << StaticFileHandler.new(config.path, match_hidden: config.hidden)
+        handlers << StaticFileHandler.new(config.path, match_hidden: config.hidden?)
 
         server = HTTP::Server.new(handlers)
         address = server.bind_tcp(config.host, config.port)

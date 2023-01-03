@@ -131,7 +131,7 @@ module Zipstream
     end
 
     record DirectoryListing, request_path : String, path : String, match_hidden : Bool do
-      def each_file
+      def each_file(&)
         Dir.children(path).sort_by(&.downcase).each do |entry|
           next if !match_hidden && entry.starts_with?('.')
 

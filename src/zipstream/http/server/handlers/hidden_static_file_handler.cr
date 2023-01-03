@@ -8,7 +8,7 @@ module Zipstream
     end
 
     def call(context)
-      if !config.hidden && hidden?(context)
+      if !config.hidden? && hidden?(context)
         context.response.respond_with_status(:not_found)
 
         return

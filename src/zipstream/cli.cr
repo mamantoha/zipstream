@@ -69,7 +69,7 @@ module Zipstream
             puts "ERROR: `#{name}` is not a valid url path, should contain only alphanumeric symbols"
             exit
           end
-          config.url_path = name unless config.web
+          config.url_path = name unless config.web?
         end
 
         parser.on("-j", "--junk-parent", "stream the content of an archive without including the parent directory") do
@@ -114,7 +114,7 @@ module Zipstream
       optparse.parse
 
       config.path = File.expand_path(ARGV.pop? || config.path, Dir.current)
-      config.prefix = File.directory?(config.path) && !config.junk ? Path[config.path].basename : nil
+      config.prefix = File.directory?(config.path) && !config.junk? ? Path[config.path].basename : nil
 
       unless File.exists?(config.path)
         puts "Path `#{config.path}` does not exist"
