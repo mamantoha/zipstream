@@ -1,5 +1,9 @@
 version: 2.0
 shards:
+  ameba:
+    git: https://github.com/crystal-ameba/ameba.git
+    version: 1.3.1+git.commit.a091af14a8bbdb2657e069e085079b575244c69f
+
   crystar:
     git: https://github.com/naqvis/crystar.git
     version: 0.3.0+git.commit.79a1f81ad442930bc42131ae9802c795516069aa
