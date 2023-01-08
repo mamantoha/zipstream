@@ -39,6 +39,7 @@ module Zipstream
         return
       end
 
+      # ameba:disable Lint/NotNil
       original_path = context.request.path.not_nil!
       request_path = self.request_path(URI.decode(original_path))
 
