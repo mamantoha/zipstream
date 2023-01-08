@@ -2,37 +2,52 @@ name: Crystal CI
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   check_format:
     runs-on: ubuntu-latest
-    container:
-      image: crystallang/crystal
     steps:
-      - uses: actions/checkout@v2
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: Install dependencies
         run: shards install
       - name: Check format
         run: crystal tool format --check
-  test_latest:
+
+  check_ameba:
     runs-on: ubuntu-latest
-    container:
-      image: crystallang/crystal
     steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: shards install
-      - name: Run tests
-        run: crystal spec
-  test_nightly:
-    runs-on: ubuntu-latest
-    container:
-      image: crystallang/crystal:nightly
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Crystal Ameba Linter
+        id: crystal-ameba
+        uses: crystal-ameba/github-action@v0.6.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, crystal: latest}
+          - {os: ubuntu-latest, crystal: nightly}
+          - {os: macos-latest}
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal }}
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: Install dependencies
         run: shards install
       - name: Run tests
