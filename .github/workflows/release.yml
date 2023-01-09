@@ -2,7 +2,8 @@ name: Release
 
 on:
   push:
-    branches: master
+    tags:
+      - "*"
 
 jobs:
   release:
@@ -28,7 +29,7 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - uses: MeilCli/setup-crystal-action@v4
       - name: Install dependencies
-        run: shards install
+        run: shards install --production
       - name: Compile release
         env:
           LLVM_CONFIG: /usr/local/opt/llvm/bin/llvm-config
