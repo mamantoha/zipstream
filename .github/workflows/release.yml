@@ -21,7 +21,7 @@ jobs:
             target_name: zipstream
             asset_suffix: darwin-amd64
           - os: windows-latest
-            target_name: zipstream
+            target_name: zipstream.exe
             asset_suffix: windows-amd64
       fail-fast: false
 
@@ -46,6 +46,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: bin/${{ matrix.target_name }}
-          asset_name: ${{ matrix.target_name }}_${{ steps.vars.outputs.tag }}_${{ matrix.asset_suffix }}
+          asset_name: zipstream_${{ steps.vars.outputs.tag }}_${{ matrix.asset_suffix }}
           tag: ${{ github.ref }}
           overwrite: true
