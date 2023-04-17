@@ -40,7 +40,7 @@ jobs:
           PKG_CONFIG_PATH: /usr/local/opt/openssl/lib/pkgconfig
         run: |
           crystal -v
-          shards build --release -Dpreview_mt
+          shards build --release
       - name: Add binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
