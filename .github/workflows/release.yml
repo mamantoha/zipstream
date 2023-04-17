@@ -22,7 +22,7 @@ jobs:
             asset_suffix: darwin-amd64
           - os: windows-latest
             target_name: zipstream.exe
-            asset_suffix: windows-amd64
+            asset_suffix: windows-amd64.exe
       fail-fast: false
 
     steps:
