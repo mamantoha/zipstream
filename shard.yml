@@ -14,11 +14,6 @@ dependencies:
   qr-code:
     github: spider-gazelle/qr-code
 
-development_dependencies:
-  ameba:
-    github: crystal-ameba/ameba
-    branch: master
-
 targets:
   zipstream:
     main: src/zipstream_cli.cr
