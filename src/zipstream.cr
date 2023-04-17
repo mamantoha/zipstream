@@ -64,15 +64,14 @@ module Zipstream
       puts generate_qr_code(config.remote_url)
     end
 
-    shutdown = ->(_s : Signal) do
+    shutdown = ->do
       puts
       puts "See you later, alligator!"
       server.close
       exit
     end
 
-    Signal::INT.trap &shutdown
-    Signal::TERM.trap &shutdown
+    Process.on_interrupt &shutdown
 
     STDOUT.flush
 
