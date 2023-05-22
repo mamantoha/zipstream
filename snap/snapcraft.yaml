@@ -1,6 +1,6 @@
 name: zipstream
 base: core20
-version: '0.20.9'
+version: '0.20.10'
 summary: Easily share files and directories over the network
 description: |
   A command-line tool that allows you to easily share files and directories
