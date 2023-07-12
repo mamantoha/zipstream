@@ -2,7 +2,9 @@ module Zipstream
   module TarHelper
     def tar_directory!(path : String, io)
       Crystar::Writer.open(io) do |tar|
-        Dir.glob(File.join(path, "**/*"), match_hidden: config.hidden?).each do |entry|
+        file_match_options = config.hidden? ? File::MatchOptions::NativeHidden : File::MatchOptions.glob_default
+
+        Dir.glob(File.join(path, "**/*"), match: file_match_options).each do |entry|
           next unless File.readable?(entry)
 
           relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
