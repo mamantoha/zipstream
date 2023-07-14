@@ -17,6 +17,7 @@ module Zipstream
     property prefix : String? = nil
     property? junk : Bool = false
     property? hidden : Bool = false
+    property? no_symlinks : Bool = false
     property? no_banner : Bool = false
 
     def initialize
