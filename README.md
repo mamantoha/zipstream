@@ -1,5 +1,5 @@
 <div align="center">
-<img src="snap/gui/favicon.png" width="128" height="128" />
+<img src="assets/favicon.png" width="128" height="128" />
 <h1>zipstream</h1>
 <h3>
 A command line tool that allows you to easily share files and directories over the network
@@ -135,7 +135,7 @@ Run an ad hoc http static server in specified directory, available at <http://lo
 zipstream /media/disk/crystal --web
 ```
 
-[![Image of browser](https://raw.githubusercontent.com/mamantoha/zipstream/master/assets/zipstream_web.png)](https://raw.githubusercontent.com/mamantoha/zipstream/master/assets/zipstream_web.png)
+![Image of browser](assets/zipstream_web.png)
 
 ## Contributing
 
