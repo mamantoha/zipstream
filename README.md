@@ -1,4 +1,9 @@
-# zipstream
+<div align="center">
+<img src="snap/gui/favicon.png" width="128" height="128" />
+<h1>zipstream</h1>
+<h3>
+A command line tool that allows you to easily share files and directories over the network
+</h3>
 
 [![Built with Crystal](https://img.shields.io/badge/built%20with-crystal-000000.svg?style=?style=plastic&logo=appveyor)](https://crystal-lang.org/)
 ![Crystal CI](https://github.com/mamantoha/zipstream/workflows/Crystal%20CI/badge.svg)
@@ -6,8 +11,7 @@
 [![Commits Since Last Release](https://img.shields.io/github/commits-since/mamantoha/zipstream/latest.svg)](https://github.com/mamantoha/zipstream/pulse)
 [![zipstream](https://snapcraft.io//zipstream/badge.svg)](https://snapcraft.io/zipstream)
 [![zipstream](https://snapcraft.io//zipstream/trending.svg?name=0)](https://snapcraft.io/zipstream)
-
-A command line tool that allows you to easily share files and directories over the network
+</div>
 
 ## Installation
 
