@@ -40,6 +40,7 @@ module Zipstream
 
         Dir.glob(File.join(path, "**/*"), match: file_match_options).each do |entry|
           next unless File.readable?(entry)
+          next if config.no_symlinks? && File.symlink?(entry)
 
           relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
 

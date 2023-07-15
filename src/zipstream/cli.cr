@@ -80,6 +80,10 @@ module Zipstream
           config.hidden = true
         end
 
+        parser.on("--no-symlinks", "do not follow symlinks") do
+          config.no_symlinks = true
+        end
+
         parser.on("--user=user", "the username user for file retrieval") do |name|
           config.user = name
         end
