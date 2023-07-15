@@ -72,6 +72,7 @@ OPTIONS
     -e PATH, --endpoint=PATH         the URL path to the resource. Only for CLI mode. (default: ``)
     -j, --junk-parent                stream the content of an archive without including the parent directory
     -h, --hidden                     match hidden files and folders
+    --no-symlinks                    do not follow symlinks
     --user=user                      the username user for file retrieval
     --password=password              the password password for file retrieval
     --no-banner                      hide the ASCII art banner
