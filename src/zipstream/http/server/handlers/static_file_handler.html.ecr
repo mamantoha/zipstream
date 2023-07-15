@@ -105,8 +105,10 @@
   <% encoded_request_path = URI.encode_path(request_path) %>
 
   <% unless request_path == "/" %>
+    <% parent_path = encoded_request_path.ends_with?("/") ? encoded_request_path : "#{encoded_request_path}/" %>
+
     <div id="parentDirLinkBox" style="display: block;">
-      <a id="parentDirLink" class="icon up" href="<%= encoded_request_path %>..">
+      <a id="parentDirLink" class="icon up" href="<%= parent_path %>..">
         <span id="parentDirText">[parent directory]</span>
       </a>
     </div>
