@@ -8,7 +8,9 @@ module Zipstream
     end
 
     def call(context)
-      path = File.join(config.path, context.request.path)
+      decoded_path = URI.decode(context.request.path)
+
+      path = File.join(config.path, decoded_path)
 
       unless File.exists?(path)
         context.response.respond_with_status(:not_found)

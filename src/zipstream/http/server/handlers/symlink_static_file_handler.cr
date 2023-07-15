@@ -8,7 +8,9 @@ module Zipstream
     end
 
     def call(context)
-      if config.no_symlinks? && contains_symlink_in_parent_directory?(config.path, context.request.path.chomp('/'))
+      decoded_path = URI.decode(context.request.path)
+
+      if config.no_symlinks? && contains_symlink_in_parent_directory?(config.path, decoded_path.chomp('/'))
         context.response.respond_with_status(:not_found)
 
         return
