@@ -12,6 +12,7 @@ module Zipstream
           handlers << LogHandler.new
         end
 
+        handlers << NotFoundStaticFileHandler.new(config)
         handlers << HiddenStaticFileHandler.new(config)
         handlers << SymlinkStaticFileHandler.new(config)
 
