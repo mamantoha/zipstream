@@ -138,6 +138,12 @@ zipstream /media/disk/crystal --web
 
 ![Image of browser](assets/zipstream_web.png)
 
+## Development
+
+```console
+base64 -w 0 ./assets/favicon.png > ./src/zipstream/http/server/assets/favicon.png.txt
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/zipstream/fork>)
