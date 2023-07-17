@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="zipstream" value="notranslate">
   <title>Index of <%= HTML.escape request_path %></title>
-  <link rel="icon" type="image/png" href='data:image/png;base64,<%= {{ read_file("#{__DIR__}/../assets/favicon.png.txt") }} %>'/>
+  <link rel="icon" type="image/png" href='data:image/png;base64,<%= Base64.encode({{ read_file("#{__DIR__}/../assets/favicon.png") }}) %>'/>
 
   <style>
     html {
