@@ -37,6 +37,12 @@
       text-align: center !important;
     }
 
+    .scrollable {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
     /* Copyright (c) The Chromium Authors. All rights reserved. */
     h1 {
       border-bottom: 1px solid #c0c0c0;
@@ -118,7 +124,7 @@
 <body>
   <div class="container">
     <div class="content">
-      <h1>Index of <%= HTML.escape request_path %></h1>
+      <h1 class="scrollable">Index of <%= HTML.escape request_path %></h1>
       <% encoded_request_path = URI.encode_path(request_path) %>
 
       <% unless request_path == "/" %>
