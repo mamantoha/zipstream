@@ -98,6 +98,17 @@
       margin-bottom: 10px;
       padding-bottom: 10px;
     }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    /* Add responsive styles */
+    @media screen and (max-width: 600px) {
+      .additional-info {
+        display: none;
+      }
+    }
   </style>
 
 </head>
@@ -116,17 +127,19 @@
     </div>
   <% end %>
 
-  <table>
-    <thead>
-      <tr class="header" id="theader">
-        <th id="nameColumnHeader" tabindex="0" role="button">Name</th>
-        <th id="sizeColumnHeader" tabindex="0" role="button">Size</th>
-        <th id="dateColumnHeader" tabindex="0" role="button">Date Modified</th>
-      </tr>
-    </thead>
-    <tbody id="tbody">
-    </tbody>
-  </table>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr class="header" id="theader">
+          <th id="nameColumnHeader" tabindex="0" role="button">Name</th>
+          <th id="sizeColumnHeader" tabindex="0" role="button">Size</th>
+          <th id="dateColumnHeader" tabindex="0" role="button">Date Modified</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+  </div>
 
   <script>
     // Copyright (c) The Chromium Authors. All rights reserved.
@@ -262,7 +275,7 @@
     <div class="text-center">
       Powered by <a href="https://github.com/mamantoha/zipstream">zipstream</a>/<%= Zipstream::VERSION %>
 
-      (Crystal/<%= Crystal::VERSION %> crystar/<%= Crystar::VERSION %> crystal-zip64/<%= Zip64::VERSION %>)
+      <span class="additional-info">(Crystal/<%= Crystal::VERSION %> crystar/<%= Crystar::VERSION %> crystal-zip64/<%= Zip64::VERSION %>)</span>
     <div>
   </footer>
 </body>
