@@ -20,3 +20,6 @@ Metrics/CyclomaticComplexity:
   - src/zipstream/http/server/handlers/static_file_handler.cr
   Enabled: true
   Severity: Warning
+
+Documentation/DocumentationAdmonition:
+  Enabled: false
