@@ -64,18 +64,18 @@ module Zipstream
       puts generate_qr_code(config.remote_url)
     end
 
-    shutdown = ->do
-      puts
-      puts "See you later, alligator!"
-      server.close
-      exit
-    end
-
-    Process.on_interrupt &shutdown
+    Process.on_terminate { shutdown(server) }
 
     STDOUT.flush
 
     server.listen unless config.env == "test"
+  end
+
+  private def shutdown(server)
+    puts
+    puts "See you later, alligator!"
+    server.close
+    exit
   end
 
   def run_web
