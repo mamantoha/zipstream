@@ -13,13 +13,9 @@ module Zipstream
     end
 
     def call(context)
-      if context.request.headers[AUTH]?
-        if value = context.request.headers[AUTH]
-          if value.size > 0 && value.starts_with?(BASIC)
-            if authorize?(value)
-              return call_next(context)
-            end
-          end
+      if value = context.request.headers[AUTH]?
+        if value.starts_with?(BASIC)
+          return call_next(context) if authorize?(value)
         end
       end
 
