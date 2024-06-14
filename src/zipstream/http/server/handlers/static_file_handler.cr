@@ -258,7 +258,7 @@ module Zipstream
 
           file_path = File.join(path, entry)
 
-          next unless File.readable?(file_path)
+          next unless File::Info.readable?(file_path)
           next if !follow_symlinks && File.symlink?(file_path)
 
           file = File.new(file_path)

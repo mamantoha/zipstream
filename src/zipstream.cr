@@ -44,7 +44,7 @@ module Zipstream
 
     address = server.bind_tcp(config.host, config.port)
 
-    unless File.readable?(config.path)
+    unless File::Info.readable?(config.path)
       puts "#{config.path} : Permission denied"
       exit
     end
