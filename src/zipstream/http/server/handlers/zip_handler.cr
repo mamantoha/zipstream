@@ -39,7 +39,7 @@ module Zipstream
         file_match_options = config.hidden? ? File::MatchOptions::NativeHidden : File::MatchOptions.glob_default
 
         Dir.glob(File.join(path, "**/*"), match: file_match_options).each do |entry|
-          next unless File.readable?(entry)
+          next unless File::Info.readable?(entry)
           next if config.no_symlinks? && File.symlink?(entry)
 
           relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")

@@ -2,7 +2,7 @@ version: 2.0
 shards:
   crystar:
     git: https://github.com/naqvis/crystar.git
-    version: 0.3.1+git.commit.d489227415c81e72d9bc1f84abda83cd044ca95d
+    version: 0.4.0+git.commit.3975502cbe89bca528e1af4b86fbfc0f0bfacce1
 
   qr-code:
     git: https://github.com/spider-gazelle/qr-code.git
