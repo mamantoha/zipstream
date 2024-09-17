@@ -6,6 +6,10 @@ require "crystar"
 require "zip64"
 require "qr-code"
 
+require "./ext/lib_c/c/netinet/in"
+require "./ext/socket"
+require "./ext/socket/address"
+
 require "./zipstream/**"
 
 module Zipstream
