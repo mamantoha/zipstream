@@ -5,6 +5,7 @@ require "option_parser"
 require "crystar"
 require "zip64"
 require "qr-code"
+require "ip_address_list"
 
 require "./zipstream/**"
 
