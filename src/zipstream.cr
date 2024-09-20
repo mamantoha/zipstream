@@ -5,10 +5,7 @@ require "option_parser"
 require "crystar"
 require "zip64"
 require "qr-code"
-
-require "./ext/lib_c/c/netinet/in"
-require "./ext/socket"
-require "./ext/socket/address"
+require "ip_address_list"
 
 require "./zipstream/**"
 

@@ -4,6 +4,10 @@ shards:
     git: https://github.com/naqvis/crystar.git
     version: 0.4.0+git.commit.3975502cbe89bca528e1af4b86fbfc0f0bfacce1
 
+  ip_address_list:
+    git: https://github.com/mamantoha/ip_address_list.git
+    version: 0.1.0
+
   qr-code:
     git: https://github.com/spider-gazelle/qr-code.git
     version: 1.0.3
