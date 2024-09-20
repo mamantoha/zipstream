@@ -6,7 +6,7 @@ shards:
 
   ip_address_list:
     git: https://github.com/mamantoha/ip_address_list.git
-    version: 0.1.0
+    version: 0.1.1
 
   qr-code:
     git: https://github.com/spider-gazelle/qr-code.git
