@@ -11,8 +11,8 @@ dependencies:
   zip64:
     github: crystal-garage/crystal-zip64
     version: ">= 0.2.0"
-  qr-code:
-    github: spider-gazelle/qr-code
+  qrcode_terminal:
+    github: mamantoha/qrcode_terminal
   ip_address_list:
     github: mamantoha/ip_address_list
 

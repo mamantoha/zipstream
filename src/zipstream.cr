@@ -4,7 +4,7 @@ require "mime"
 require "option_parser"
 require "crystar"
 require "zip64"
-require "qr-code"
+require "qrcode_terminal"
 require "ip_address_list"
 
 require "./zipstream/**"
@@ -62,7 +62,7 @@ module Zipstream
 
     if config.qr?
       puts "Or scan the QR code to access to download the file on your phone"
-      puts generate_qr_code(config.remote_url)
+      puts QRCodeTerminal.generate(config.remote_url)
     end
 
     Process.on_terminate { shutdown(server) }
@@ -94,7 +94,7 @@ module Zipstream
 
     if config.qr?
       puts "Or scan the QR code to access `#{config.remote_url}` on your phone"
-      puts generate_qr_code(config.remote_url)
+      puts QRCodeTerminal.generate(config.remote_url)
     end
 
     server.run unless config.env == "test"
@@ -221,50 +221,5 @@ module Zipstream
     lines << %q{%s     %s %s|_|   %s     %s    %s     %s    %s      %s          %s} % colors
 
     lines.join("\n")
-  end
-
-  private def generate_qr_code(text : String) : String
-    # based on https://github.com/gtanner/qrcode-terminal/blob/master/lib/main.js
-    qr = QRCode.new(text, level: :h)
-
-    platte = {
-      white_all:   '█',
-      white_black: '▀',
-      black_white: '▄',
-      black_all:   ' ',
-    }
-
-    module_count = qr.modules.size
-    module_data = qr.modules
-
-    border_top = platte[:black_white].to_s * (module_count + 2)
-    border_bottom = platte[:white_black].to_s * (module_count + 2)
-
-    String.build do |str|
-      str << border_top
-      str << '\n'
-
-      module_count.times.step(2).each do |row|
-        str << platte[:white_all] # left border
-
-        module_count.times.each do |col|
-          if !module_data.dig?(row, col) && !module_data.dig?(row + 1, col)
-            str << platte[:white_all]
-          elsif !module_data.dig?(row, col) && module_data.dig?(row + 1, col)
-            str << platte[:white_black]
-          elsif module_data.dig?(row, col) && !module_data.dig?(row + 1, col)
-            str << platte[:black_white]
-          else
-            str << platte[:black_all]
-          end
-        end
-
-        str << platte[:white_all] # right border
-
-        str << '\n'
-      end
-
-      str << border_bottom unless module_count.odd?
-    end
   end
 end
