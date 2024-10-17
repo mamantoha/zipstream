@@ -14,7 +14,7 @@ shards:
 
   qrcode_terminal:
     git: https://github.com/mamantoha/qrcode_terminal.git
-    version: 0.1.0
+    version: 0.1.3
 
   zip64:
     git: https://github.com/crystal-garage/crystal-zip64.git
