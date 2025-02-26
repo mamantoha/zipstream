@@ -9,7 +9,7 @@ private def run(code)
 
   String.build do |stdout|
     String.build do |stderr|
-      Process.new("crystal", ["eval"], input: IO::Memory.new(code), output: stdout, error: stderr).wait
+      Process.new("crystal", ["eval", code], output: stdout, error: stderr).wait
     end
   end
 end
