@@ -42,7 +42,7 @@ module Zipstream
     end
 
     def self.release_date
-      {{ `crystal eval 'puts Time.utc.to_s(%q(%Y-%m-%d))'`.stringify.chomp }}
+      {{ `date -R`.stringify.chomp }}
     end
 
     def remote_url : String
