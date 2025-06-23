@@ -44,7 +44,10 @@ module Zipstream
           next unless File::Info.readable?(entry)
           next if config.no_symlinks? && File.symlink?(entry)
 
-          relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
+          relative_path = [
+            config.prefix,
+            entry.sub(path, "").lstrip(Path::SEPARATORS[0])
+          ].compact.join(Path::SEPARATORS[0])
 
           if File.directory?(entry)
             zip.add_dir(relative_path)

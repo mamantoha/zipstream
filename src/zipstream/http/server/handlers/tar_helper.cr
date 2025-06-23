@@ -10,7 +10,10 @@ module Zipstream
           next unless File::Info.readable?(entry)
           next if config.no_symlinks? && File.symlink?(entry)
 
-          relative_path = [config.prefix, entry.sub(path, "").lstrip("/")].compact.join("/")
+          relative_path = [
+            config.prefix,
+            entry.sub(path, "").lstrip(Path::SEPARATORS[0])
+          ].compact.join(Path::SEPARATORS[0])
 
           permissions = File.info(entry).permissions.value.to_i64
 
