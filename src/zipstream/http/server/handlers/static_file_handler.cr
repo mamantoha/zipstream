@@ -298,7 +298,7 @@ module Zipstream
 
     record DirectoryListing, request_path : String, path : String, match_hidden : Bool, follow_symlinks : Bool do
       def each_entry(&)
-        Dir.each_child(path) do |entry|
+        Dir.children(path).sort_by(&.downcase).each do |entry|
           next if !match_hidden && entry.starts_with?('.')
 
           absolute_path = [path, entry].join
