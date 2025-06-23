@@ -302,6 +302,9 @@ module Zipstream
           next if !match_hidden && entry.starts_with?('.')
 
           absolute_path = [path, entry].join
+
+          next unless File::Info.readable?(absolute_path)
+
           file_info = File.info(absolute_path)
 
           next if !follow_symlinks && file_info.symlink?
