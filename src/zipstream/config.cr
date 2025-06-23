@@ -42,7 +42,11 @@ module Zipstream
     end
 
     def self.release_date
-      {{ `date -R`.stringify.chomp }}
+      {% if flag?(:windows) %}
+        {{ `powershell -Command "Get-Date -Format 'R'"`.stringify.chomp }}
+      {% else %}
+        {{ `date -R`.stringify.chomp }}
+      {% end %}
     end
 
     def remote_url : String
