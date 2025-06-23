@@ -15,7 +15,7 @@ module Zipstream
               zipstream - is a command line tool that allows you to easily share files and directories over the network
 
           VERSION
-              #{Zipstream::VERSION}
+              #{Zipstream.version}
 
           SYNOPSIS
               zipstream PATH [options]
@@ -103,7 +103,7 @@ module Zipstream
         parser.on("-V", "--version", "print program version") do
           default_target = Crystal::DESCRIPTION.split.last
 
-          puts "zipstream #{Zipstream::VERSION} (#{default_target}) crystal/#{Crystal::VERSION} crystar/#{Crystar::VERSION} crystal-zip64/#{Zip64::VERSION}"
+          puts "zipstream #{Zipstream.version} (#{default_target}) crystal/#{Crystal::VERSION} crystar/#{Crystar::VERSION} crystal-zip64/#{Zip64::VERSION}"
           puts "Release-Date: #{Time.parse_rfc2822(Config.release_date).to_s("%Y-%m-%d")}"
           exit
         end
