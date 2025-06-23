@@ -269,33 +269,19 @@
       </script>
 
       <% each_entry do |entry| %>
+        <% name, file_info = entry %>
         <script>
           addRow(
-            "<%= HTML.escape(entry) %>",
-            "<%= URI.encode_path(entry) %>",
-            <%= false %>,
-            <%= 777 %>,
-            "<%= "777 bytes" %>",
-            <%= 1234567890 %>,
-            "<%= 1234567890 %>"
+            "<%= HTML.escape(name) %>",
+            "<%= URI.encode_path(name) %>",
+            <%= file_info.directory? %>,
+            <%= file_info.size %>,
+            "<%= file_info.size.humanize_bytes %>",
+            <%= file_info.modification_time.to_unix %>,
+            "<%= file_info.modification_time %>"
           )
         </script>
       <% end %>
-
-      <!-- <% each_file do |file| %>
-        <% entry = File.basename(file.path) %>
-        <script>
-          addRow(
-            "<%= HTML.escape(entry) %>",
-            "<%= URI.encode_path(entry) %>",
-            <%= file.info.directory? %>,
-            <%= file.info.size %>,
-            "<%= file.info.size.humanize_bytes %>",
-            <%= file.info.modification_time.to_unix %>,
-            "<%= file.info.modification_time %>"
-          )
-        </script>
-      <% end %> -->
     </div>
 
     <div class="footer">

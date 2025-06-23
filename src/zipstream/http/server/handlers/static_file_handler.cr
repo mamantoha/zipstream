@@ -299,7 +299,10 @@ module Zipstream
     record DirectoryListing, request_path : String, path : String do
       def each_entry(&)
         Dir.each_child(path) do |entry|
-          yield entry
+          absolute_path = [path, entry].join
+          file_info = File.info(absolute_path)
+
+          yield Tuple.new(entry, file_info)
         end
       end
 
