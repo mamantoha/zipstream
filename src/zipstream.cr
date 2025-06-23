@@ -214,7 +214,7 @@ module Zipstream
     lines << %q{%s     %s_%s      %s     %s_   %s     %s    %s      %s          %s} % colors
     lines << %q{%s    %s(_)%s     %s    %s| |  %s     %s    %s      %s          %s} % colors
     lines << %q{%s ____%s_%s _ __ %s ___%s| |_ %s_ __ %s___ %s __ _ %s_ __ ___  %s} % colors
-    lines << %q{%s|_  /%s %s| '_ \%s/ __|%s __|%s '__/%s _ \%s/ _` |%s '_ ` _ \ %s} % colors
+    lines << %q(%s|_  /%s %s| '_ \%s/ __|%s __|%s '__/%s _ \%s/ _` |%s '_ ` _ \ %s) % colors
     lines << %q{%s / /%s| %s| |_) %s\__ \%s |_%s| | %s|  __/%s (_| |%s | | | | |%s} % colors
     lines << %q{%s/___%s|_%s| .__/%s|___/%s\__|%s_|  %s\___|%s\__,_|%s_| |_| |_|%s} % colors
     lines << %q{%s     %s %s| |   %s     %s    %s     %s    %s      %s          %s} % colors

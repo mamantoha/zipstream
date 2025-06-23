@@ -248,7 +248,7 @@ module Zipstream
     end
 
     private def etag(modification_time)
-      %{W/"#{modification_time.to_unix}"}
+      %(W/"#{modification_time.to_unix}")
     end
 
     record DirectoryListing, request_path : String, path : String, match_hidden : Bool, follow_symlinks : Bool do

@@ -11,7 +11,6 @@ module Zipstream
 
       @io << message(context, elapsed_text)
       @io.flush
-      @io
 
       context
     end
