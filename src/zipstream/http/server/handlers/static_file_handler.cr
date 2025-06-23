@@ -304,10 +304,11 @@ module Zipstream
           absolute_path = [path, entry].join
           file_info = File.info(absolute_path)
 
-          # next unless file_info.readable?
           next if !follow_symlinks && file_info.symlink?
 
           yield Tuple.new(entry, file_info)
+        rescue File::Error
+          next
         end
       end
 
