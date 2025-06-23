@@ -4,7 +4,7 @@ module Zipstream
       Crystar::Writer.open(io) do |tar|
         file_match_options = config.hidden? ? File::MatchOptions::NativeHidden : File::MatchOptions.glob_default
 
-        pattern = [Path[path].to_posix, "/**/*"].join
+        pattern = Path[path].to_posix.join("**/*")
 
         Dir.glob(pattern, match: file_match_options).each do |entry|
           next unless File::Info.readable?(entry)
