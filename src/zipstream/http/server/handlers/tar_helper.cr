@@ -12,7 +12,7 @@ module Zipstream
 
           relative_path = [
             config.prefix,
-            entry.sub(path, "").lstrip(Path::SEPARATORS[0])
+            entry.sub(path, "").lstrip(Path::SEPARATORS[0]),
           ].compact.join(Path::SEPARATORS[0])
 
           permissions = File.info(entry).permissions.value.to_i64
