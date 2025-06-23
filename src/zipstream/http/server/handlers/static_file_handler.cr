@@ -299,27 +299,15 @@ module Zipstream
     record DirectoryListing, request_path : String, path : String do
       def each_entry(&)
         Dir.each_child(path) do |entry|
+          # next if !match_hidden && entry.starts_with?('.')
+
           absolute_path = [path, entry].join
           file_info = File.info(absolute_path)
 
+          next unless file_info.readable?
+          # next if !follow_symlinks && file_info.symlink?
+
           yield Tuple.new(entry, file_info)
-        end
-      end
-
-      def each_file(&)
-        Dir.children(path).sort_by(&.downcase).each do |entry|
-          # next if !match_hidden && entry.starts_with?('.')
-
-          file_path = File.join(path, entry)
-
-          next unless File::Info.readable?(file_path)
-          # next if !follow_symlinks && File.symlink?(file_path)
-
-          file = File.new(file_path)
-
-          yield file
-        rescue File::AccessDeniedError
-          next
         end
       end
 
