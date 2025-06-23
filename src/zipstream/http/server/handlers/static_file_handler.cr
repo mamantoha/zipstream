@@ -59,7 +59,7 @@ module Zipstream
       return call_next(context) unless file_info
 
       if file_info.directory?
-        directory_index(context, request_path, file_path)
+        directory_index(context, request_path, file_path, @match_hidden, @follow_symlinks)
       elsif file_info.file?
         serve_file_with_cache(context, file_info, file_path)
       else # Not a normal file (FIFO/device/socket)
@@ -296,16 +296,16 @@ module Zipstream
       %{W/"#{modification_time.to_unix}"}
     end
 
-    record DirectoryListing, request_path : String, path : String do
+    record DirectoryListing, request_path : String, path : String, match_hidden : Bool, follow_symlinks : Bool do
       def each_entry(&)
         Dir.each_child(path) do |entry|
-          # next if !match_hidden && entry.starts_with?('.')
+          next if !match_hidden && entry.starts_with?('.')
 
           absolute_path = [path, entry].join
           file_info = File.info(absolute_path)
 
-          next unless file_info.readable?
-          # next if !follow_symlinks && file_info.symlink?
+          # next unless file_info.readable?
+          next if !follow_symlinks && file_info.symlink?
 
           yield Tuple.new(entry, file_info)
         end
@@ -314,17 +314,17 @@ module Zipstream
       ECR.def_to_s "#{__DIR__}/static_file_handler.html.ecr"
     end
 
-    private def directory_index(context : HTTP::Server::Context, request_path : Path, path : Path)
+    private def directory_index(context : HTTP::Server::Context, request_path : Path, path : Path, match_hidden, follow_symlinks)
       unless @directory_listing
         return call_next(context)
       end
 
       context.response.content_type = "text/html; charset=utf-8"
-      directory_listing(context.response, request_path, path)
+      directory_listing(context.response, request_path, path, match_hidden, follow_symlinks)
     end
 
-    private def directory_listing(io : IO, request_path : Path, path : Path)
-      DirectoryListing.new(request_path.to_s, path.to_s).to_s(io)
+    private def directory_listing(io : IO, request_path : Path, path : Path, match_hidden, follow_symlinks)
+      DirectoryListing.new(request_path.to_s, path.to_s, match_hidden, follow_symlinks).to_s(io)
     end
   end
 end
