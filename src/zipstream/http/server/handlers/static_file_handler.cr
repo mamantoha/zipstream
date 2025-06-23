@@ -297,6 +297,12 @@ module Zipstream
     end
 
     record DirectoryListing, request_path : String, path : String do
+      def each_entry(&)
+        Dir.each_child(path) do |entry|
+          yield entry
+        end
+      end
+
       def each_file(&)
         Dir.children(path).sort_by(&.downcase).each do |entry|
           # next if !match_hidden && entry.starts_with?('.')

@@ -268,7 +268,21 @@
         window.addEventListener('DOMContentLoaded', onLoad);
       </script>
 
-      <% each_file do |file| %>
+      <% each_entry do |entry| %>
+        <script>
+          addRow(
+            "<%= HTML.escape(entry) %>",
+            "<%= URI.encode_path(entry) %>",
+            <%= false %>,
+            <%= 777 %>,
+            "<%= "777 bytes" %>",
+            <%= 1234567890 %>,
+            "<%= 1234567890 %>"
+          )
+        </script>
+      <% end %>
+
+      <!-- <% each_file do |file| %>
         <% entry = File.basename(file.path) %>
         <script>
           addRow(
@@ -281,7 +295,7 @@
             "<%= file.info.modification_time %>"
           )
         </script>
-      <% end %>
+      <% end %> -->
     </div>
 
     <div class="footer">
