@@ -20,7 +20,8 @@ module Zipstream
           handlers << BasicAuthHandler.new(config.user.to_s, config.password.to_s)
         end
 
-        handlers << StaticFileHandler.new(config.path, match_hidden: config.hidden?, follow_symlinks: !config.no_symlinks?)
+        # handlers << StaticFileHandler.new(config.path, match_hidden: config.hidden?, follow_symlinks: !config.no_symlinks?)
+        handlers << StaticFileHandler.new(config.path)
 
         server = HTTP::Server.new(handlers)
         server.bind_tcp(config.host, config.port)
