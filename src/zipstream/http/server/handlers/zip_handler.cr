@@ -1,6 +1,9 @@
+require "./archive_helper"
+
 module Zipstream
   class ZipHandler
     include HTTP::Handler
+    include Zipstream::ArchiveHelper
 
     property config
 
@@ -46,13 +49,6 @@ module Zipstream
       base_path = Path[path].to_posix
 
       Zip64::Writer.open(io) do |zip|
-        file_match_options =
-          if config.hidden?
-            File::MatchOptions::All
-          else
-            File::MatchOptions::NativeHidden | File::MatchOptions::OSHidden
-          end
-
         # Path separator in patterns needs to be always /
         pattern = base_path.join("**/*")
 
@@ -62,10 +58,7 @@ module Zipstream
 
           entry_path = Path[entry].to_posix
 
-          relative_path = [
-            config.prefix,
-            entry_path.to_s.sub(base_path.to_s, "").lstrip('/'),
-          ].compact.join('/')
+          relative_path = relative_path(base_path, entry_path)
 
           if File.directory?(entry)
             zip.add_dir(relative_path)
