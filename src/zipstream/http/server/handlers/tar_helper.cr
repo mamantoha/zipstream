@@ -2,7 +2,7 @@ module Zipstream
   module TarHelper
     def tar_directory!(path : String, io)
       Crystar::Writer.open(io) do |tar|
-        file_match_options = config.hidden? ? File::MatchOptions::NativeHidden : File::MatchOptions.glob_default
+        file_match_options = config.hidden? ? File::MatchOptions::All : File::MatchOptions::NativeHidden | File::MatchOptions::OSHidden
 
         pattern = Path[path].to_posix.join("**/*")
 
