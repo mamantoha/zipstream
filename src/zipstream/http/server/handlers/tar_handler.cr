@@ -1,4 +1,4 @@
-require "./tar_helper"
+require "../../../helpers/tar_helper"
 
 module Zipstream
   class TarHandler

@@ -1,4 +1,4 @@
-require "./zip_helper"
+require "../../../helpers/zip_helper"
 
 module Zipstream
   class ZipHandler
