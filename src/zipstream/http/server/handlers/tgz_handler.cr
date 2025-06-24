@@ -17,19 +17,27 @@ module Zipstream
       reader, writer = IO.pipe
 
       spawn same_thread: true do
-        while line = reader.gets(chomp: false)
-          context.response.print line
+        begin
+          while line = reader.gets(chomp: false)
+            context.response.print line
+          end
+        rescue ex : HTTP::Server::ClientError
+          # Client disconnected, ignore the error
         end
 
         reader.close
       end
 
-      Compress::Gzip::Writer.open(writer) do |gzip|
-        if File.directory?(config.path)
-          tar_directory!(config.path, gzip)
-        else
-          tar_file!(config.path, gzip)
+      begin
+        Compress::Gzip::Writer.open(writer) do |gzip|
+          if File.directory?(config.path)
+            tar_directory!(config.path, gzip)
+          else
+            tar_file!(config.path, gzip)
+          end
         end
+      rescue ex : IO::Error
+        # Client disconnected, ignore the error
       end
 
       writer.close

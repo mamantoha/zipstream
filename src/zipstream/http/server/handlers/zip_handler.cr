@@ -14,17 +14,25 @@ module Zipstream
       reader, writer = IO.pipe
 
       spawn same_thread: true do
-        while line = reader.gets(chomp: false)
-          context.response.puts(line)
+        begin
+          while line = reader.gets(chomp: false)
+            context.response.puts(line)
+          end
+        rescue ex : HTTP::Server::ClientError
+          # Client disconnected, ignore the error
         end
 
         reader.close
       end
 
-      if File.directory?(config.path)
-        zip_directory!(config.path, writer)
-      else
-        zip_file!(config.path, writer)
+      begin
+        if File.directory?(config.path)
+          zip_directory!(config.path, writer)
+        else
+          zip_file!(config.path, writer)
+        end
+      rescue ex : IO::Error
+        # Client disconnected, ignore the error
       end
 
       writer.close
