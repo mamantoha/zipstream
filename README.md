@@ -15,17 +15,46 @@ A command line tool that allows you to easily share files and directories over t
 
 ## Installation
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/zipstream)
-
 Precompiled executables are available for Linux, macOS and Windows from [Releases](https://github.com/mamantoha/zipstream/releases) page.
 
-### Snap-specific information
+### Installation (via Snap Store)
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/zipstream)
+
+#### Snap-specific information
 
 Due to the snap's confined nature, the application can only access files in the user's home directory.
 To access files under `/media` or `/mnt` directories you have to manually connect the snap
 to the `removable-media` interface by running the following command in a terminal
 
 `sudo snap connect zipstream:removable-media`
+
+### Installation (via Homebrew)
+
+You can install `zipstream` using [Homebrew](https://brew.sh/):
+
+```sh
+brew install mamantoha/zipstream/zipstream
+```
+
+If you haven’t tapped the formula yet:
+
+```sh
+brew tap mamantoha/zipstream
+brew install zipstream
+```
+
+To upgrade:
+
+```sh
+brew upgrade zipstream
+```
+
+To uninstall:
+
+```sh
+brew uninstall zipstream
+```
 
 ### Build from source
 
