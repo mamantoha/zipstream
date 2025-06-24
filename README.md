@@ -10,6 +10,7 @@ A command line tool that allows you to easily share files and directories over t
 [![GitHub release](https://img.shields.io/github/release/mamantoha/zipstream.svg)](https://github.com/mamantoha/zipstream/releases)
 [![Commits Since Last Release](https://img.shields.io/github/commits-since/mamantoha/zipstream/latest.svg)](https://github.com/mamantoha/zipstream/pulse)
 [![zipstream](https://snapcraft.io//zipstream/badge.svg)](https://snapcraft.io/zipstream)
+![Homebrew](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mamantoha/homebrew-zipstream/main/badge.json)
 [![zipstream](https://snapcraft.io//zipstream/trending.svg?name=0)](https://snapcraft.io/zipstream)
 </div>
 
