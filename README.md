@@ -17,7 +17,7 @@ A command line tool that allows you to easily share files and directories over t
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/zipstream)
 
-Precompiled executables are available for Linux and macOS from [Releases](https://github.com/mamantoha/zipstream/releases) page.
+Precompiled executables are available for Linux, macOS and Windows from [Releases](https://github.com/mamantoha/zipstream/releases) page.
 
 ### Snap-specific information
 
