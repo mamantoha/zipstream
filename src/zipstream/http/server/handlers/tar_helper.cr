@@ -1,6 +1,8 @@
 module Zipstream
   module TarHelper
     def tar_directory!(path : String, io)
+      base_path = Path[path].to_posix
+
       Crystar::Writer.open(io) do |tar|
         file_match_options =
           if config.hidden?
@@ -9,16 +11,18 @@ module Zipstream
             File::MatchOptions::NativeHidden | File::MatchOptions::OSHidden
           end
 
-        pattern = Path[path].to_posix.join("**/*")
+        pattern = base_path.join("**/*")
 
         Dir.glob(pattern, match: file_match_options).each do |entry|
           next unless File::Info.readable?(entry)
           next if config.no_symlinks? && File.symlink?(entry)
 
+          entry_path = Path[entry].to_posix
+
           relative_path = [
             config.prefix,
-            entry.sub(path, "").lstrip(Path::SEPARATORS[0]),
-          ].compact.join(Path::SEPARATORS[0])
+            entry_path.to_s.sub(base_path.to_s, "").lstrip('/'),
+          ].compact.join('/')
 
           permissions = File.info(entry).permissions.value.to_i64
 

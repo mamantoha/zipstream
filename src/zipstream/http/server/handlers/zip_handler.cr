@@ -43,6 +43,8 @@ module Zipstream
     end
 
     private def zip_directory!(path : String, io : IO)
+      base_path = Path[path].to_posix
+
       Zip64::Writer.open(io) do |zip|
         file_match_options =
           if config.hidden?
@@ -52,16 +54,18 @@ module Zipstream
           end
 
         # Path separator in patterns needs to be always /
-        pattern = Path[path].to_posix.join("**/*")
+        pattern = base_path.join("**/*")
 
         Dir.glob(pattern, match: file_match_options).each do |entry|
           next unless File::Info.readable?(entry)
           next if config.no_symlinks? && File.symlink?(entry)
 
+          entry_path = Path[entry].to_posix
+
           relative_path = [
             config.prefix,
-            entry.sub(path, "").lstrip(Path::SEPARATORS[0]),
-          ].compact.join(Path::SEPARATORS[0])
+            entry_path.to_s.sub(base_path.to_s, "").lstrip('/'),
+          ].compact.join('/')
 
           if File.directory?(entry)
             zip.add_dir(relative_path)
