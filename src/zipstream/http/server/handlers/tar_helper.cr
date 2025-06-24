@@ -19,7 +19,7 @@ module Zipstream
 
           if File.directory?(entry)
             header = Crystar::Header.new(
-              name: "#{relative_path}/",
+              name: "#{relative_path}#{Path::SEPARATORS[0]}",
               mode: permissions,
               mod_time: File.info(entry).modification_time,
               size: 0_i64
