@@ -38,6 +38,7 @@ module Zipstream
       Zip64::Writer.open(io) do |zip|
         file_match_options = config.hidden? ? File::MatchOptions::NativeHidden : File::MatchOptions.glob_default
 
+        # Path separator in patterns needs to be always /
         pattern = Path[path].to_posix.join("**/*")
 
         Dir.glob(pattern, match: file_match_options).each do |entry|
