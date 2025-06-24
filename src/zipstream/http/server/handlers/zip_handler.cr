@@ -36,7 +36,12 @@ module Zipstream
 
     private def zip_directory!(path : String, io : IO)
       Zip64::Writer.open(io) do |zip|
-        file_match_options = config.hidden? ? File::MatchOptions::All : File::MatchOptions::NativeHidden | File::MatchOptions::OSHidden
+        file_match_options =
+          if config.hidden?
+            File::MatchOptions::All
+          else
+            File::MatchOptions::NativeHidden | File::MatchOptions::OSHidden
+          end
 
         # Path separator in patterns needs to be always /
         pattern = Path[path].to_posix.join("**/*")
