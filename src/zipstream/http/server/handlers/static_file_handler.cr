@@ -5,7 +5,13 @@ require "uri"
 require "mime"
 
 module Zipstream
-  # A simple handler that lists directories and serves files under a given public directory.
+  # A handler that lists directories and serves files under a given public directory.
+  #
+  # This handler can send precompressed content, if the client accepts it, and a file
+  # with the same name and `.gz` extension appended is found in the same directory.
+  # Precompressed files are only served if they are newer than the original file.
+  #
+  # NOTE: To use `StaticFileHandler`, you must explicitly import it with `require "http"`
   class StaticFileHandler
     include HTTP::Handler
 
@@ -139,14 +145,22 @@ module Zipstream
     private def serve_file(context : HTTP::Server::Context, file_info, file_path : Path, original_file_path : Path, last_modified : Time)
       context.response.content_type = MIME.from_filename(original_file_path.to_s, "application/octet-stream")
 
-      File.open(file_path) do |file|
-        if range_header = context.request.headers["Range"]?
-          serve_file_range(context, file, range_header, file_info)
-        else
-          context.response.headers["Accept-Ranges"] = "bytes"
+      begin
+        File.open(file_path) do |file|
+          if range_header = context.request.headers["Range"]?
+            serve_file_range(context, file, range_header, file_info)
+          else
+            context.response.headers["Accept-Ranges"] = "bytes"
 
-          serve_file_full(context, file, file_info)
+            serve_file_full(context, file, file_info)
+          end
         end
+      rescue File::Error
+        # If there's any file error, we report the file as not existing.
+        # Even if it exists but is not readable, we don't want to disclose its
+        # existence.
+        context.response.respond_with_status(:not_found)
+        return
       end
     end
 
@@ -265,8 +279,10 @@ module Zipstream
       path
     end
 
-    private def redirect_to(context : HTTP::Server::Context, url)
-      context.response.redirect url.to_s
+    private def redirect_to(context : HTTP::Server::Context, path)
+      uri = context.request.uri.dup
+      uri.path = URI.encode_path(path.to_s)
+      context.response.redirect uri
     end
 
     private def add_cache_headers(response_headers : HTTP::Headers, last_modified : Time) : Nil
