@@ -20,6 +20,6 @@ targets:
   zipstream:
     main: src/zipstream_cli.cr
 
-crystal: 1.17.1
+crystal: 1.18.0
 
 license: MIT
