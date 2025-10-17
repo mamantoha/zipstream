@@ -46,4 +46,3 @@ parts:
      - libssl-dev
     crystal-build-options:
     - -Dpreview_mt
-    - -Dexecution_context
