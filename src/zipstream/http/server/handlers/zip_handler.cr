@@ -16,7 +16,7 @@ module Zipstream
 
       reader, writer = IO.pipe
 
-      spawn same_thread: true do
+      spawn do
         begin
           while line = reader.gets(chomp: false)
             context.response.puts(line)
