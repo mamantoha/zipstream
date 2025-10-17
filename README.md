@@ -84,7 +84,7 @@ NAME
     zipstream - is a command line tool that allows you to easily share files and directories over the network
 
 VERSION
-    0.23.21
+    0.24.0
 
 SYNOPSIS
     zipstream PATH [options]
