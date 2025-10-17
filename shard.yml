@@ -15,6 +15,8 @@ dependencies:
     github: mamantoha/qrcode_terminal
   ip_address_list:
     github: mamantoha/ip_address_list
+  gradientty:
+    github: galacthd/gradientty
 
 targets:
   zipstream:
