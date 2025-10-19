@@ -1,6 +1,8 @@
 name: zipstream
 version: 0.24.1
 
+crystal: 1.18.1
+
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
@@ -21,7 +23,5 @@ dependencies:
 targets:
   zipstream:
     main: src/zipstream_cli.cr
-
-crystal: 1.18.0
 
 license: MIT
