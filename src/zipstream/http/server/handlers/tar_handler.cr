@@ -14,25 +14,25 @@ module Zipstream
       context.response.content_type = "application/x-tar"
       context.response.headers["Content-Disposition"] = "attachment; filename=\"#{config.filename}\""
 
-      reader, writer = IO.pipe
+      WaitGroup.wait do |wg|
+        reader, writer = IO.pipe
 
-      spawn same_thread: true do
-        while line = reader.gets(chomp: false)
-          context.response.puts line
+        wg.spawn do
+          while line = reader.gets(chomp: false)
+            context.response.puts line
+          end
+
+          reader.close
         end
 
-        reader.close
+        if File.directory?(config.path)
+          tar_directory!(config.path, writer)
+        else
+          tar_file!(config.path, writer)
+        end
+
+        writer.close
       end
-
-      if File.directory?(config.path)
-        tar_directory!(config.path, writer)
-      else
-        tar_file!(config.path, writer)
-      end
-
-      writer.close
-
-      Fiber.yield
 
       call_next(context)
     end
