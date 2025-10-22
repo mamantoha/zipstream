@@ -1,7 +1,7 @@
 name: zipstream
-version: 0.25.0
+version: 0.25.1
 
-crystal: 1.18.1
+crystal: 1.18.2
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
