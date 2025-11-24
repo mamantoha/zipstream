@@ -92,15 +92,15 @@
     }
 
     a.file {
-      background: url('data:image/png;base64,<%= Base64.strict_encode({{read_file("#{__DIR__}/../assets/file.png")}}) %>') left top no-repeat;
+      background: url('data:image/png;base64,<%= Base64.strict_encode({{ read_file("#{__DIR__}/../assets/file.png") }}) %>') left top no-repeat;
     }
 
     a.dir {
-      background: url('data:image/png;base64,<%= Base64.strict_encode({{read_file("#{__DIR__}/../assets/dir.png")}}) %>') left top no-repeat;
+      background: url('data:image/png;base64,<%= Base64.strict_encode({{ read_file("#{__DIR__}/../assets/dir.png") }}) %>') left top no-repeat;
     }
 
     a.up {
-      background: url('data:image/png;base64,<%= Base64.strict_encode({{read_file("#{__DIR__}/../assets/up.png")}}) %>') left top no-repeat;
+      background: url('data:image/png;base64,<%= Base64.strict_encode({{ read_file("#{__DIR__}/../assets/up.png") }}) %>') left top no-repeat;
     }
 
     #parentDirLinkBox {
