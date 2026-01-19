@@ -5,7 +5,7 @@ private def run(code)
     require "./src/zipstream"
     Zipstream.config.env = "test"
     #{code}
-  CR
+    CR
 
   String.build do |stdout|
     String.build do |stderr|
