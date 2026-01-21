@@ -22,7 +22,7 @@ module Zipstream
             while line = reader.gets(chomp: false)
               context.response.puts(line)
             end
-          rescue ex : HTTP::Server::ClientError
+          rescue HTTP::Server::ClientError
             # Client disconnected, ignore the error
           end
 
@@ -35,7 +35,7 @@ module Zipstream
           else
             zip_file!(config.path, writer)
           end
-        rescue ex : IO::Error
+        rescue IO::Error
           # Client disconnected, ignore the error
         end
 
