@@ -1,6 +1,6 @@
 name: zipstream
 base: core24
-version: '0.25.3'
+version: '0.25.4'
 title: Zipstream
 summary: Easily share files and directories over the network
 description: |
