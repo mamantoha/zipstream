@@ -1,6 +1,7 @@
 name: zipstream
-base: core20
+base: core24
 version: '0.25.3'
+title: Zipstream
 summary: Easily share files and directories over the network
 description: |
   A command-line tool that allows you to easily share files and directories
@@ -14,12 +15,15 @@ description: |
 
   `sudo snap connect zipstream:removable-media`
 icon: snap/gui/logo.png
-contact: anton.maminov@gmai.com
+contact: anton.maminov@gmail.com
 type: app
 
 grade: stable
 confinement: strict
-architectures: [amd64]
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
 compression: lzo
 
 license: MIT
@@ -40,10 +44,24 @@ apps:
 parts:
   zipstream:
     source: ./
-    plugin: crystal
+    plugin: nil
+    build-snaps:
+      - crystal/latest/stable
     build-packages:
-     - git
-     - libssl-dev
-    crystal-build-options:
-    - -Dpreview_mt
-    - -Dexecution_context
+      - git
+      - libevent-dev
+      - libgc-dev
+      - libpcre2-dev
+      - libssl-dev
+      - pkg-config
+      - zlib1g-dev
+    stage-packages:
+      - libevent-2.1-7
+      - libgc1
+      - libpcre2-8-0
+      - libssl3
+      - zlib1g
+    override-build: |
+      shards install --production
+      shards build --release -- -Dpreview_mt -Dexecution_context
+      install -Dm755 bin/zipstream "$CRAFT_PART_INSTALL/bin/zipstream"
